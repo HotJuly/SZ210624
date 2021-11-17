@@ -17,9 +17,22 @@ export default {
   methods:{
     changeShow(){
       this.isEdit = true;
-      console.log(this.isEdit)
-      debugger
-      this.$refs.input123.focus();
+      this.isEdit = false;
+      // for(var i=0;i<100000;i++){
+      //   console.log(i)
+      // }
+      Promise.resolve().then(()=>{
+        // 更新DOM
+        console.log("更新DOM")
+      })
+      // console.log(this.isEdit)
+      // debugger
+      // console.log(this.$refs.input123)
+      // this.$refs.input123.focus();
+      // Promise.resolve().then(()=>{
+      //   console.log(1)
+      // })
+      // console.log(2)
     }
   }
 }
