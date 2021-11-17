@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <meta name="viewport" content="width=device-width"></meta>
+    <!-- <meta name="viewport" content="initial-scale=2,width=device-width"></meta> -->
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        img{
+            width:375px;
+            /* width:50vw; */
+            /* width:50%; */
+        }
+        html{
+            font-size:20px;
+        }
+    </style>
+</head>
+<body>
+    <div style="width:100px">
+        <img src="./自拍.jpg" alt="">
+    </div>
+    <script>
+        /*
+            移动端一共具有几个视口?
+                布局视口,视觉视口,理想视口(完美视口)
+                布局视口   
+                    页面具有什么东西全都会保存在布局视口上
+                    标签:html(css像素)
+                视觉视口
+                    你能看到多少东西都由视觉视口决定
+                    就是手机屏幕大小(设备独立像素)
+                    滚动条就是布局视口大小超过视觉视口大小,才会出现的东西
+                理想视口
+                    当布局视口的宽度等于视觉视口的宽度,这种状态称为理想视口
+
+            如何获取到布局视口宽度
+                document.documentElement.clientWidth
+
+                默认宽度是980px
+                如何修改布局视口宽度
+                    可以通过meta[name=viewport]标签对布局视口宽度进行修改
+                        width=device-width
+                        initial-scale=1
+                            initial-scale=设备独立像素宽度/布局视口宽度=0.5
+                        这两个值谁计算出来的宽度更大,就以谁为准
+
+            适配
+                rem适配
+                viewport适配
+
+                需求:让图片在任何设备上都占屏幕的一半宽度
+                    1.通过百分比实现适配
+                        缺点:width的百分比参考与父级宽度
+                    2.通过vw和vh实现适配
+                        100vw=屏幕100%宽度
+                        100vh=屏幕100%高度
+                        缺点:兼容性不太行
+                    总结:我们需要一个全局可见的不变单位(该单位会参考于屏幕宽度进行变化)
+
+                    rem->root em
+        */
+
+        // console.log('html',document.documentElement.clientWidth)
+
+        // rem适配
+        //1.获取当前屏幕宽度
+        //通过理想视口,将布局视口宽度变成视觉视口宽度,再读取布局视口宽度
+        // const width = document.documentElement.clientWidth;
+
+        // const fontSize = width/10;
+
+        // document.documentElement.style.fontSize=fontSize+"px";
+
+
+        // viewport适配
+        // 设计稿宽度
+        const width = 750;
+
+        // 当前手机屏幕宽度
+        const clientWidth = document.documentElement.clientWidth;
+
+        const scale = clientWidth/width;
+
+        const viewport = document.querySelector('meta[name=viewport]');
+
+        viewport.content=`initial-scale=${scale}`;
+    </script>
+</body>
+</html>
