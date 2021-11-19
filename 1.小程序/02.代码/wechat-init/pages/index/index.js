@@ -13,8 +13,20 @@ Page({
     data: {
       msg:"我是初始化数据"
     },
+
+    changeMsg(){
+      this.setData({
+        msg:"我是修改之后的数据"
+      })
+    },
     handleClick(){
-      console.log('handleClick')
+      // console.log('handleClick')
+      wx.redirectTo({
+        url:"../log/log"
+      })
+      // wx.navigateTo({
+      //   url:"../log/log"
+      // })
     },
     handleParent(){
       console.log('handleParent')
@@ -32,17 +44,17 @@ Page({
       // 小程序没有数据劫持
       // this.data.msg="我是修改之后的数据"
 
-      console.log("msg1",this.data.msg)
-      this.setData({
-        msg:"我是修改之后的数据1"
-      })
-      this.setData({
-        msg:"我是修改之后的数据2"
-      })
-      this.setData({
-        msg:"我是修改之后的数据3"
-      })
-      console.log("msg2",this.data.msg)
+      // console.log("msg1",this.data.msg)
+      // this.setData({
+      //   msg:"我是修改之后的数据1"
+      // })
+      // this.setData({
+      //   msg:"我是修改之后的数据2"
+      // })
+      // this.setData({
+      //   msg:"我是修改之后的数据3"
+      // })
+      // console.log("msg2",this.data.msg)
     },
 
     /**

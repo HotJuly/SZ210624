@@ -6,13 +6,17 @@
     button组件相当于原先的button标签,是行内块元素
  -->
 <view class="indexContainer">
-    <image class="avatarUrl" src="/static/images/dazuo.jpeg"></image>
+    <image 
+    class="avatarUrl" 
+    bindtap="changeMsg" 
+    src="/static/images/dazuo.jpeg"></image>
     <text class="username">
         {{msg}}
     </text>
-    <view bindtap="handleParent">
+    <button bindtap="handleClick">欢迎来到尚硅谷</button>
+    <!-- <view bindtap="handleParent">
         <button capture-bind:tap="handleClick">欢迎来到尚硅谷</button>
-    </view>
+    </view> -->
     <!-- <text>
         <view>123</view>
     </text> -->
