@@ -10,8 +10,10 @@
     <text class="username">
         {{msg}}
     </text>
-    <button>欢迎来到尚硅谷</button>
-    <text>
+    <view bindtap="handleParent">
+        <button capture-bind:tap="handleClick">欢迎来到尚硅谷</button>
+    </view>
+    <!-- <text>
         <view>123</view>
-    </text>
+    </text> -->
 </view>

@@ -13,6 +13,16 @@ Page({
     data: {
       msg:"我是初始化数据"
     },
+    handleClick(){
+      console.log('handleClick')
+    },
+    handleParent(){
+      console.log('handleParent')
+    },
+
+    // methods:{
+    //   handleClick
+    // }
 
     /**
      * 生命周期函数--监听页面加载
