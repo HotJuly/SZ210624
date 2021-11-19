@@ -6,12 +6,29 @@
     button组件相当于原先的button标签,是行内块元素
  -->
 <view class="indexContainer">
-    <image 
+    <open-data type="userAvatarUrl"></open-data>
+
+
+    <!-- <image 
     class="avatarUrl" 
     bindtap="changeMsg" 
-    src="/static/images/dazuo.jpeg"></image>
+    wx:if="{{userInfo.avatarUrl}}"
+    src="{{userInfo.avatarUrl}}"
+    ></image> -->
+
+    <!-- <button
+    wx:else
+    class="avatarUrl getuserinfo" 
+    open-type="getUserInfo"
+    bindgetuserinfo="getUserInfo"
+    >获取用户信息</button> -->
+
+    <button
+    class="avatarUrl getuserinfo" 
+    bindtap="getUserProfile"
+    >获取用户信息</button>
     <text class="username">
-        {{msg}}
+        {{userInfo.nickName}}
     </text>
     <button bindtap="handleClick">欢迎来到尚硅谷</button>
     <!-- <view bindtap="handleParent">

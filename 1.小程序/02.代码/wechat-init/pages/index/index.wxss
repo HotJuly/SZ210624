@@ -13,3 +13,7 @@
   height:400rpx;
   border-radius: 50%;
 }
+
+.getuserinfo{
+  line-height:400rpx;
+}

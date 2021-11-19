@@ -11,7 +11,41 @@ Page({
         3.如果遇到数据类型为Set(转为数组),如果遇到Map(转为对象)
     */
     data: {
-      msg:"我是初始化数据"
+      msg:"我是初始化数据",
+      userInfo:{}
+    },
+
+    // 最新版获取用户个人信息
+    getUserProfile(){
+
+      wx.getUserProfile({
+        desc:"用于测试",
+        success:(detail)=>{
+          // 能进入这里,说明用户允许授权
+          // console.log('success',event)
+          this.setData({
+            userInfo:detail.userInfo
+          })
+        }
+      })
+    },
+
+    // 用于获取用户个人信息
+    getUserInfo(event){
+      // 无法判断用户点击拒绝还是允许
+      // 该回调函数两种情况都会执行
+      /*
+        通过event.detail.userInfo可以获取到用户信息
+      
+      */
+     const userInfo = event.detail.userInfo;
+     if(userInfo){
+      //  能进入此处就代表用户允许授权
+      this.setData({
+        userInfo
+      })
+     }
+      // console.log('getUserInfo',event)
     },
 
     changeMsg(){
@@ -21,9 +55,9 @@ Page({
     },
     handleClick(){
       // console.log('handleClick')
-      wx.redirectTo({
-        url:"../log/log"
-      })
+      // wx.redirectTo({
+      //   url:"../log/log"
+      // })
       // wx.navigateTo({
       //   url:"../log/log"
       // })
@@ -56,35 +90,48 @@ Page({
       // })
       // console.log("msg2",this.data.msg)
 
-      console.log('--------onLoad---------')
+      // console.log('--------onLoad---------')
+
+
+
+      // wx.getUserInfo({
+      //   success:(detail)=>{
+      //     // console.log('success',event)
+      //     this.setData({
+      //       userInfo:detail.userInfo
+      //     })
+      //   }
+      // })
+
+
     },
 
     /**
      * 生命周期函数--监听页面初次渲染完成
      */
     onReady: function () {
-      console.log('--------onReady---------')
+      // console.log('--------onReady---------')
     },
 
     /**
      * 生命周期函数--监听页面显示
      */
     onShow: function () {
-      console.log('--------onShow---------')
+      // console.log('--------onShow---------')
     },
 
     /**
      * 生命周期函数--监听页面隐藏
      */
     onHide: function () {
-      console.log('--------onHide---------')
+      // console.log('--------onHide---------')
     },
 
     /**
      * 生命周期函数--监听页面卸载
      */
     onUnload: function () {
-      console.log('--------onUnload---------')
+      // console.log('--------onUnload---------')
     },
 
     /**
