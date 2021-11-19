@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // 1,4,5,3,2
+        // js引擎,一共分为主线程代码,宏任务代码,微任务代码
+        /*
+            宏任务:setTimeout,setInterval,事件,ajax
+            我任务:.then
+        */
+        console.log(1);
+
+        // setTimeout()是主线程代码,所以会立马执行,但是他的回调函数会被延迟执行时间
+        setTimeout(()=>{
+            console.log(2)
+        },1000)
+
+        // function a(){
+
+        // }
+        // a();
+
+        setTimeout(()=>{
+            console.log(3)
+        },0)
+
+        Promise.resolve().then(()=>{
+            console.log(5)
+        })
+
+        console.log(4);
+    </script>
+</body>
+</html>

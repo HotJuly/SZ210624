@@ -2,6 +2,7 @@
     view组件相当于是原先的div标签,是块级元素
     image组件相当于原先的img标签,是行内块元素,注意小程序中是成对标签
     text组件相当于原先的span标签,是行内元素
+        在小程序中text标签是弟中弟,阶级最低,内部只能写文本,不能嵌套任何标签
     button组件相当于原先的button标签,是行内块元素
  -->
 <view class="indexContainer">
@@ -10,4 +11,7 @@
         {{msg}}
     </text>
     <button>欢迎来到尚硅谷</button>
+    <text>
+        <view>123</view>
+    </text>
 </view>

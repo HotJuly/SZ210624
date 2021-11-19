@@ -23,6 +23,68 @@
         // 该题在实现功能的前提下,要考虑下计算性能
         // 注意:sumPager会被调用多次
 
+        // const nums = [-1, 0, 1, 5, 10, -9, -7, 30, -44];
+
+        /*
+            由于reduce方法会遍历完整个数组,假设当前数组长度为10000
+            计算次数:10000*3=30000
+        
+        */
+        // function sumPager(startIndex,endIndex){
+        //     return nums.reduce((pre,item,index)=>{
+        //         if(index>=startIndex&&index<=endIndex){
+        //             return pre+item
+        //         }else{
+        //             return pre
+        //         }
+        //     },0);
+        // }
+
+        
+        /*
+            由于reduce方法会遍历完整个数组,假设当前数组长度为10000
+            sumPager(0,9999)   sumPager(900,9899)   sumPager(1900,8899)
+            由于加上了slice方法,可以切割出有效的数组
+            计算次数:10000+9000+7000=26000
+        
+        */
+        // function sumPager(startIndex,endIndex){
+        //     return nums.slice(startIndex,endIndex+1).reduce((pre,item,index)=>{
+        //             return pre+item
+        //     },0);
+        // }
+
+
+        /*
+            由于forEach的存在,所以该数组肯定需要遍历10000次
+            计算次数:10000+1+1+1=10003
+            缺点:在首次计算中,一定输
+        */
+        (function(){
+            const nums = [-1, 0, 1, 5, 10, -9, -7, 30, -44];
+            const total = [];
+
+            nums.forEach((item,index)=>{
+                if(index===0){
+                    total.push(item);
+                }else{
+                    total.push(total[index-1]+item)
+                }
+            })
+
+            function sumPager(startIndex,endIndex){
+                if(startIndex===0){
+                    return total[endIndex]
+                }else{
+                    return total[endIndex] - total[startIndex-1]
+                }
+            }
+            window.sumPager=sumPager;
+        })();
+
+        console.log(sumPager(0,2))
+        console.log(sumPager(2,5))
+        console.log(sumPager(4,7))
     </script>
 </body>
 
