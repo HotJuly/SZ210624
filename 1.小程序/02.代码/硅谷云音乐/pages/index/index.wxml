@@ -6,28 +6,20 @@
     indicator-dots
     circular
     >
-        <swiper-item class="bannerItem">
+        <!-- <swiper-item 
+        class="bannerItem"
+        v-for="(item,index) in banners"
+        :key="item.pic"
+        > -->
+        <swiper-item 
+        class="bannerItem"
+        wx:for="{{banners}}"
+        wx:for-item="banner"
+        wx:key="pic"
+        >
             <image 
             class="bannerImg" 
-            src="/static/images/dazuo.jpeg"
-            ></image>
-        </swiper-item>
-        <swiper-item class="bannerItem">
-            <image 
-            class="bannerImg" 
-            src="/static/images/dazuo.jpeg"
-            ></image>
-        </swiper-item>
-        <swiper-item class="bannerItem">
-            <image 
-            class="bannerImg" 
-            src="/static/images/dazuo.jpeg"
-            ></image>
-        </swiper-item>
-        <swiper-item class="bannerItem">
-            <image 
-            class="bannerImg" 
-            src="/static/images/dazuo.jpeg"
+            src="{{banner.pic}}"
             ></image>
         </swiper-item>
     </swiper>
@@ -59,5 +51,67 @@
             </view>
             <text class="navTitle">直播</text>
         </view>
+    </view>
+
+    <!-- 推荐歌曲区域 -->
+    <view class="recommendContainer">
+        <view class="header">
+            <view class="title">推荐歌曲</view>
+            <view class="moreContent">
+                <view class="moreTitle">
+                    为你精心推荐
+                </view>
+                <view class="more">查看更多</view>
+            </view>
+        </view>
+        <scroll-view 
+        class="recommendScroll"
+        enable-flex
+        scroll-x
+        >
+            <view class="recommendItem">
+                <image class="guigulogo" src="/static/images/dazuo.jpeg"></image>
+                <view class="recommendName">
+                    大佐天下第一大佐天下第一大佐天下第一大佐天下第一大佐天下第一大佐天下第一大佐天下第一大佐天下第一
+                </view>
+            </view>
+            <view class="recommendItem">
+                <image class="guigulogo" src="/static/images/dazuo.jpeg"></image>
+                <view class="recommendName">
+                    大佐天下第一大佐天下第一大佐天下第一大佐天下第一大佐天下第一大佐天下第一大佐天下第一大佐天下第一
+                </view>
+            </view>
+            <view class="recommendItem">
+                <image class="guigulogo" src="/static/images/dazuo.jpeg"></image>
+                <view class="recommendName">
+                    大佐天下第一大佐天下第一大佐天下第一大佐天下第一大佐天下第一大佐天下第一大佐天下第一大佐天下第一
+                </view>
+            </view>
+            <view class="recommendItem">
+                <image class="guigulogo" src="/static/images/dazuo.jpeg"></image>
+                <view class="recommendName">
+                    大佐天下第一大佐天下第一大佐天下第一大佐天下第一大佐天下第一大佐天下第一大佐天下第一大佐天下第一
+                </view>
+            </view>
+            <view class="recommendItem">
+                <image class="guigulogo" src="/static/images/dazuo.jpeg"></image>
+                <view class="recommendName">
+                    大佐天下第一大佐天下第一大佐天下第一大佐天下第一大佐天下第一大佐天下第一大佐天下第一大佐天下第一
+                </view>
+            </view>
+            <view class="recommendItem">
+                <image class="guigulogo" src="/static/images/dazuo.jpeg"></image>
+                <view class="recommendName">
+                    大佐天下第一大佐天下第一大佐天下第一大佐天下第一大佐天下第一大佐天下第一大佐天下第一大佐天下第一
+                </view>
+            </view>
+            <view class="recommendItem">
+                <image class="guigulogo" src="/static/images/dazuo.jpeg"></image>
+                <view class="recommendName">
+                    大佐天下第一大佐天下第一大佐天下第一大佐天下第一大佐天下第一大佐天下第一大佐天下第一大佐天下第一
+                </view>
+            </view>
+        </scroll-view>
+        <text>123</text>
     </view>
 </view>

@@ -29,3 +29,74 @@
 .indexContainer .nav .navItem .navTitle{
     font-size:28rpx;
 }
+
+/* 推荐歌曲开始 */
+
+.recommendContainer{
+    /* 
+        使用padding替代margin:
+            1.没有背景颜色
+            2.没有边框
+    */
+    padding:0 20rpx;
+}
+
+.header{
+    overflow:hidden;
+}
+
+.header .title{
+    font-size:28rpx;
+}
+
+.header .moreContent .moreTitle{
+    float:left;
+    font-size:30rpx;
+}
+
+.header .moreContent .more{
+    float:right;
+    border:1rpx solid;
+    padding:10rpx 20rpx;
+    border-radius: 15rpx;
+    font-size:26rpx;
+}
+
+.recommendContainer .recommendScroll{
+    display:flex;
+    height:300rpx;
+}
+
+.recommendContainer .recommendScroll .recommendItem{
+    width:200rpx;
+    margin-right:20rpx;
+}
+
+.recommendContainer .recommendScroll .recommendItem .guigulogo{
+    width:200rpx;
+    height:200rpx;
+    border-radius: 20rpx;
+}
+
+.recommendContainer .recommendScroll .recommendItem .recommendName{
+    /*
+        单行文本溢出隐藏,并显示省略号
+    */
+    /* white-space:nowrap;
+    overflow:hidden;
+    text-overflow:ellipsis; */
+
+    /* 
+        多行文本溢出隐藏,并显示省略号
+    */
+    overflow:hidden;
+    /* 1.使用webkit内核的盒模型 */
+    display:-webkit-box;
+    /* 2.告知盒模型,当前文本的排列方向 */
+    -webkit-box-orient:vertical;
+    /* 3.告知盒模型,当前文本第几行开始要隐藏 */
+    -webkit-line-clamp: 2;
+}
+
+
+/* 推荐歌曲结束 */
