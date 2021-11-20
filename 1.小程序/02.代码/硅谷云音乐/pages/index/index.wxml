@@ -69,46 +69,14 @@
         enable-flex
         scroll-x
         >
-            <view class="recommendItem">
-                <image class="guigulogo" src="/static/images/dazuo.jpeg"></image>
+            <view 
+            class="recommendItem"
+            wx:for="{{recommendList}}"
+            wx:key="id"
+            >
+                <image class="guigulogo" src="{{item.picUrl}}"></image>
                 <view class="recommendName">
-                    大佐天下第一大佐天下第一大佐天下第一大佐天下第一大佐天下第一大佐天下第一大佐天下第一大佐天下第一
-                </view>
-            </view>
-            <view class="recommendItem">
-                <image class="guigulogo" src="/static/images/dazuo.jpeg"></image>
-                <view class="recommendName">
-                    大佐天下第一大佐天下第一大佐天下第一大佐天下第一大佐天下第一大佐天下第一大佐天下第一大佐天下第一
-                </view>
-            </view>
-            <view class="recommendItem">
-                <image class="guigulogo" src="/static/images/dazuo.jpeg"></image>
-                <view class="recommendName">
-                    大佐天下第一大佐天下第一大佐天下第一大佐天下第一大佐天下第一大佐天下第一大佐天下第一大佐天下第一
-                </view>
-            </view>
-            <view class="recommendItem">
-                <image class="guigulogo" src="/static/images/dazuo.jpeg"></image>
-                <view class="recommendName">
-                    大佐天下第一大佐天下第一大佐天下第一大佐天下第一大佐天下第一大佐天下第一大佐天下第一大佐天下第一
-                </view>
-            </view>
-            <view class="recommendItem">
-                <image class="guigulogo" src="/static/images/dazuo.jpeg"></image>
-                <view class="recommendName">
-                    大佐天下第一大佐天下第一大佐天下第一大佐天下第一大佐天下第一大佐天下第一大佐天下第一大佐天下第一
-                </view>
-            </view>
-            <view class="recommendItem">
-                <image class="guigulogo" src="/static/images/dazuo.jpeg"></image>
-                <view class="recommendName">
-                    大佐天下第一大佐天下第一大佐天下第一大佐天下第一大佐天下第一大佐天下第一大佐天下第一大佐天下第一
-                </view>
-            </view>
-            <view class="recommendItem">
-                <image class="guigulogo" src="/static/images/dazuo.jpeg"></image>
-                <view class="recommendName">
-                    大佐天下第一大佐天下第一大佐天下第一大佐天下第一大佐天下第一大佐天下第一大佐天下第一大佐天下第一
+                {{item.name}}
                 </view>
             </view>
         </scroll-view>

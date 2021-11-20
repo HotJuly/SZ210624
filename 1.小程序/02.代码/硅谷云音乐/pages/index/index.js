@@ -1,4 +1,5 @@
 // pages/index/index.js
+import axios from '../../utils/axios';
 Page({
 
     /**
@@ -6,13 +7,16 @@ Page({
      */
     data: {
         // 用于存储轮播图数据
-        banners:[]
+        banners:[],
+
+        // 用于存储推荐歌曲区域数据
+        recommendList:[]
     },
 
     /**
      * 生命周期函数--监听页面加载
      */
-    onLoad: function (options) {
+    onLoad:async function (options) {
         /*
             1.在哪发
                 onLoad
@@ -23,18 +27,29 @@ Page({
             注意:小程序中,全局对象不是window,全局对象是wx
         */
     //    console.log(wx)
-        wx.request({
-            url:"http://localhost:3000/banner",
-            data:{
-                type:2
-            },
-            success:(data)=>{
-                // console.log(data)
-                this.setData({
-                    banners:data.data.banners
-                })
-            }
+        // let result = await axios('/banner',{type:2});
+        axios('/banner',{type:2})
+        .then((result)=>{
+            this.setData({
+                banners:result.banners
+            })
         })
+
+        
+        axios('/personalized')
+        .then((result)=>{
+            this.setData({
+                recommendList:result.result
+            })
+        })
+        
+
+        
+        // let result1 = await axios('/personalized');
+        
+        // this.setData({
+        //     recommendList:result1.result
+        // })
     },
 
     /**

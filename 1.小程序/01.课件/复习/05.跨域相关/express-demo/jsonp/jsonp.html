@@ -20,6 +20,7 @@
             // script标签具有src属性之后,会立马请求该资源
             // 无论请求回来的是什么数据,都会当作js执行
             script.src="http://localhost:5000/jsonp?callback=getData"
+            // getData(123)
             document.body.appendChild(script);
         }
         // getData(123)
