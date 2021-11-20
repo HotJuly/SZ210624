@@ -28,9 +28,9 @@
     bindtap="getUserProfile"
     >获取用户信息</button>
     <text class="username">
-        {{userInfo.nickName}}
+        {{msg}}
     </text>
-    <button bindtap="handleClick">欢迎来到尚硅谷</button>
+    <button bindtap="handleClick">欢迎来到{{city}}尚硅谷</button>
     <!-- <view bindtap="handleParent">
         <button capture-bind:tap="handleClick">欢迎来到尚硅谷</button>
     </view> -->

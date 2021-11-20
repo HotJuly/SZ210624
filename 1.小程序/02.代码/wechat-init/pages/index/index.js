@@ -1,4 +1,5 @@
 // pages/index/index.js
+const citySelector = requirePlugin('citySelector');
 Page({
 
     /**
@@ -12,7 +13,8 @@ Page({
     */
     data: {
       msg:"我是初始化数据",
-      userInfo:{}
+      userInfo:{},
+      city:""
     },
 
     // 最新版获取用户个人信息
@@ -61,6 +63,16 @@ Page({
       // wx.navigateTo({
       //   url:"../log/log"
       // })
+
+
+
+      const key = 'BZ7BZ-QQWCU-DHWV2-BFJJG-B2JZF-KSBT3'; // 使用在腾讯位置服务申请的key
+      const referer = '七月入栈'; // 调用插件的app的名称
+      const hotCitys = '北京,上海,深圳,武汉,泉州'; // 用户自定义的的热门城市
+
+      wx.navigateTo({
+        url: `plugin://citySelector/index?key=${key}&referer=${referer}&hotCitys=${hotCitys}`,
+      })
     },
     handleParent(){
       console.log('handleParent')
@@ -103,7 +115,6 @@ Page({
       //   }
       // })
 
-
     },
 
     /**
@@ -118,6 +129,13 @@ Page({
      */
     onShow: function () {
       // console.log('--------onShow---------')
+      const selectedCity = citySelector.getCity(); // 选择城市后返回城市信息对象，若未选择返回null
+      // console.log('selectedCity',selectedCity)
+      if(selectedCity){
+        this.setData({
+          city:selectedCity.name
+        })
+      }
     },
 
     /**
