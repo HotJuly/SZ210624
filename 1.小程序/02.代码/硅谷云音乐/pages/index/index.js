@@ -10,7 +10,10 @@ Page({
         banners:[],
 
         // 用于存储推荐歌曲区域数据
-        recommendList:[]
+        recommendList:[],
+
+        // 用于存储排行榜区域数据
+        topList:[]
     },
 
     /**
@@ -50,6 +53,30 @@ Page({
         // this.setData({
         //     recommendList:result1.result
         // })
+
+        let topList = []
+        let arr = [1,3,4,18,29];
+        let index=0;
+        while(index<arr.length){
+            let result = await axios('/top/list',{idx:arr[index++]});
+            // console.log('result',result)
+            let obj = {
+                name:result.playlist.name,
+                id:result.playlist.id,
+                list:result.playlist.tracks.slice(0,3).map((item)=>{
+                    return {
+                        id:item.id,
+                        name:item.name,
+                        imgUrl:item.al.picUrl
+                    }
+                })
+            }
+            topList.push(obj);
+        }
+
+        this.setData({
+            topList
+        })
     },
 
     /**

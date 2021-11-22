@@ -73,10 +73,34 @@
                 </view>
             </view>
         </scroll-view>
-        <text>123</text>
     </view>
 
     <view class="topContainer">
         <NavHeader title="排行榜" moreTitle="热歌风向标"/>
+        <swiper 
+        class="topSwiper"
+        next-margin="50"
+        >
+            <swiper-item 
+            class="topItem"
+            wx:for="{{topList}}"
+            wx:key="id"
+            >
+                <view class="topTitle">
+                    {{item.name}}
+                </view>
+                <view 
+                class="songItem"
+                wx:for="{{item.list}}"
+                wx:key="id"
+                >
+                    <image class="songImg" src="{{item.imgUrl}}"></image>
+                    <view class="songIndex">{{index+1}}</view>
+                    <view class="songName">
+                    {{item.name}}
+                    </view>
+                </view>
+            </swiper-item>
+        </swiper>
     </view>
 </view>

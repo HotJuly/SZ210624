@@ -79,3 +79,44 @@
 
 
 /* 推荐歌曲结束 */
+
+/* 排行榜区域开始 */
+.topContainer{
+    padding:0 20rpx;
+}
+
+.topContainer .topSwiper{
+    height:400rpx;
+}
+
+
+.topContainer .topSwiper .topItem .songItem{
+    display:flex;
+    align-items: center;
+    margin:10rpx 0 20rpx;
+}
+
+.topContainer .topSwiper .topItem .songItem .songImg{
+    width:100rpx;
+    height:100rpx;
+    border-radius: 20rpx;
+    flex-shrink: 0;
+}
+
+.topContainer .topSwiper .topItem .songItem .songIndex{
+    width:100rpx;
+    height:100rpx;
+    text-align: center;
+    line-height: 100rpx;
+    flex-shrink: 0;
+}
+
+.topContainer .topSwiper .topItem .songItem .songName{
+    /* line-height: 100rpx; */
+    white-space: nowrap;
+    overflow:hidden;
+    text-overflow: ellipsis;
+    flex-grow:1;
+}
+
+/* 排行榜区域结束 */
