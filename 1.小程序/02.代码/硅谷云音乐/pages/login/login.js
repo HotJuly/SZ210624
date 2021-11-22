@@ -1,12 +1,120 @@
 // pages/login/login.js
+import axios from '../../utils/axios';
 Page({
 
     /**
      * 页面的初始数据
      */
     data: {
-        phone:"17777777",
+        phone:"17688197777",
         password:""
+    },
+
+    // 用于监视用户点击登录按钮,实现登录功能
+    async handleLogin(){
+        /*
+            1.收集数据
+            2.处理数据格式
+            3.表单验证
+                前端表单验证
+                后端表单验证
+            4.发送请求
+            5.成功做什么,失败做什么
+
+        */
+        // console.log('handleLogin')
+        // 1.收集数据
+        const {phone,password} = this.data;
+
+        // 3.表单校验
+        if(!phone.trim()){
+            wx.showToast({
+                title:"请输入手机号",
+                icon:"error"
+            })
+            return;
+        }
+        if(!password.trim()){
+            wx.showToast({
+                title:"请输入密码",
+                icon:"error"
+            })
+            return;
+        }
+
+        // 4.发送请求
+        const result = await axios("/login/cellphone",{phone,password});
+
+        // 5.成功做什么,失败做什么
+        /*
+            状态码:
+                400 ->  手机号错误
+                501 ->  手机号不存在
+                502 ->  密码错误
+                200 ->  登录成功
+        */
+
+        const code = result.code;
+    //    console.log('result',result)
+        // if(code===200){
+        //     wx.showToast({
+        //         title:"登陆成功"
+        //     });
+        //     return;
+        // }else if(code===400){
+        //     wx.showToast({
+        //         title:"手机号错误",
+        //         icon:"error"
+        //     });
+        //     return;
+        // }else if(code===501){
+        //     wx.showToast({
+        //         title:"手机号不存在",
+        //         icon:"error"
+        //     });
+        //     return;
+        // }else if(code===502){
+        //     wx.showToast({
+        //         title:"密码错误",
+        //         icon:"error"
+        //     });
+        //     return;
+        // }
+
+        // 策略模式写法
+        const codeFn = {
+            200(){
+                wx.showToast({
+                    title:"登陆成功"
+                });
+                wx.switchTab({
+                  url: '/pages/personal/personal',
+                })
+                wx.setStorage({
+                    key:"userInfo",
+                    data:result.profile
+                })
+            },
+            400(){
+                wx.showToast({
+                    title:"手机号错误",
+                    icon:"error"
+                });
+            },
+            501(){
+                wx.showToast({
+                    title:"手机号不存在",
+                    icon:"error"
+                });
+            },
+            502(){
+                wx.showToast({
+                    title:"密码错误",
+                    icon:"error"
+                });
+            },
+        }
+        codeFn[code]&&codeFn[code]();
     },
 
     // 用于收集用户输入的手机号

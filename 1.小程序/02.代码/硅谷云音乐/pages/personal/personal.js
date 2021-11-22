@@ -9,7 +9,10 @@ Page({
         moveDistance:0,
 
         // 用于控制元素移动的过渡效果
-        moveTransition:""
+        moveTransition:"",
+
+        // 用于存储用户信息
+        userInfo:{}
     },
 
     // 用于跳转Login页面
@@ -70,7 +73,12 @@ Page({
      * 生命周期函数--监听页面显示
      */
     onShow: function () {
+        // 由于当前页面并不会销毁,所以此处如果想要每次进入都读取到用户信息,必须在onShow中执行
 
+        const userInfo = wx.getStorageSync("userInfo");
+        this.setData({
+            userInfo
+        })
     },
 
     /**
