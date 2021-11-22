@@ -15,3 +15,16 @@
 					可以通过对应事件的事件对象得知
 					event.changedTouches[0].clientY
 				想要知道手指按下位置,需要绑定touchstart事件
+
+
+需求:当用户手指抬起时,让元素回到起始位置
+拆解:
+	1.当用户手指抬起时
+		事件名:touchend
+	2.让元素回到起始位置
+		将moveDistance属性更新为0即可
+
+
+
+
+

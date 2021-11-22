@@ -6,13 +6,37 @@ Page({
      */
     data: {
         // 用于控制元素在页面上的移动
-        moveDistance:0
+        moveDistance:0,
+
+        // 用于控制元素移动的过渡效果
+        moveTransition:""
+    },
+
+    // 用于跳转Login页面
+    toLogin(){
+        wx.navigateTo({
+          url: '/pages/login/login',
+        })
+    },
+
+    // 用于监视用户的手指抬起操作
+    handleTouchEnd(event){
+        // this.startY = event.changedTouches[0].clientY;
+        // console.log('handleTouchStart',startY)
+        this.setData({
+            moveDistance:0,
+            moveTransition:"transform 1s"
+        })
+
     },
 
     // 用于监视用户的手指按下操作
     handleTouchStart(event){
         this.startY = event.changedTouches[0].clientY;
         // console.log('handleTouchStart',startY)
+        this.setData({
+            moveTransition:""
+        })
 
     },
 
@@ -22,6 +46,7 @@ Page({
         const moveY = event.changedTouches[0].clientY;
         // console.log('handleTouchMove',moveY)
         const moveDistance = moveY - this.startY
+        if(moveDistance<=0||moveDistance>=80)return;
         this.setData({
             moveDistance
         })

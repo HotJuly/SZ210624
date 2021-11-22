@@ -67,7 +67,10 @@
             wx:for="{{recommendList}}"
             wx:key="id"
             >
-                <image class="guigulogo" src="{{item.picUrl}}"></image>
+                <image class="guigulogo" 
+                src="{{item.picUrl}}"
+                lazy-load
+                ></image>
                 <view class="recommendName">
                 {{item.name}}
                 </view>
@@ -94,7 +97,7 @@
                 wx:for="{{item.list}}"
                 wx:key="id"
                 >
-                    <image class="songImg" src="{{item.imgUrl}}"></image>
+                    <image lazy-load class="songImg" src="{{item.imgUrl}}"></image>
                     <view class="songIndex">{{index+1}}</view>
                     <view class="songName">
                     {{item.name}}

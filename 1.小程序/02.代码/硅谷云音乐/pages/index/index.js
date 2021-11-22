@@ -57,26 +57,45 @@ Page({
         let topList = []
         let arr = [1,3,4,18,29];
         let index=0;
-        while(index<arr.length){
-            let result = await axios('/top/list',{idx:arr[index++]});
-            // console.log('result',result)
-            let obj = {
-                name:result.playlist.name,
-                id:result.playlist.id,
-                list:result.playlist.tracks.slice(0,3).map((item)=>{
-                    return {
-                        id:item.id,
-                        name:item.name,
-                        imgUrl:item.al.picUrl
-                    }
-                })
-            }
-            topList.push(obj);
-        }
+        // while(index<arr.length){
+        //     let result = await axios('/top/list',{idx:arr[index++]});
+        //     // console.log('result',result)
+        //     let obj = {
+        //         name:result.playlist.name,
+        //         id:result.playlist.id,
+        //         list:result.playlist.tracks.slice(0,3).map((item)=>{
+        //             return {
+        //                 id:item.id,
+        //                 name:item.name,
+        //                 imgUrl:item.al.picUrl
+        //             }
+        //         })
+        //     }
+        //     topList.push(obj);
+        // }
 
-        this.setData({
-            topList
-        })
+        
+        while(index<arr.length){
+            axios('/top/list',{idx:arr[index++]})
+            .then((result)=>{
+                let obj = {
+                    name:result.playlist.name,
+                    id:result.playlist.id,
+                    list:result.playlist.tracks.slice(0,3).map((item)=>{
+                        return {
+                            id:item.id,
+                            name:item.name,
+                            imgUrl:item.al.picUrl
+                        }
+                    })
+                }
+                topList.push(obj);
+
+                this.setData({
+                    topList
+                })
+            })
+        }
     },
 
     /**
