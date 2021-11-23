@@ -1,0 +1,36 @@
+功能:
+	1.下拉刷新
+	2.上拉加载更多
+
+需求:当用户下拉当前页面时,自动请求当前分组最新数据
+拆解:
+	1.当用户下拉当前页面时
+		实现操作:
+			1.用户下拉页面
+				-在当前页面的json配置中,添加enablePullDownRefresh:true配置,开启页面下拉动画
+				-通过Page配置对象中的onPullDownRefresh事件回调函数,可以监视到用户下拉页面操作
+
+
+			2.用户下拉scroll-view组件
+				-在scroll-view组件上,添加refresher-enabled属性可以开启页面下拉动画
+				-通过scroll-view组件绑定事件监听(事件名:refresherrefresh),可以监视到用户下拉scroll-view操作
+					
+				出现问题:scroll-view组件的下拉动画不会自动收回
+				-在scroll-view组件上,添加refresher-triggered属性可以控制下拉动画状态
+				-当数据请求成功之后,将该属性值修改为false(通过状态控制)
+				
+	2.自动请求当前分组最新数据
+		使用js请求最新数据
+		函数名:getVideoList
+
+需求:当用户上拉页面触底时,自动请求更多数据
+	1.当用户上拉页面触底时
+		实现操作:
+			1.用户上拉页面触底
+				-想要触发上拉触底操作,当前页面布局视口高度必须高于视觉视口高度(页面内容要超出屏幕)
+				-通过Page配置对象中的onReachBottom事件回调函数,可以监视到用户上拉页面触底操作
+
+			2.用户上拉scroll-view组件触底
+				-在scroll-view组件上绑定事件监听(事件名scrolltolower),可以监视到用户上拉scroll-view触底操作
+	2.自动请求更多数据
+		由于当前没有真实接口,所以此处将旧数据进行拷贝处理

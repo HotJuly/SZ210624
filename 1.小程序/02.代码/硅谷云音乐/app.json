@@ -6,7 +6,7 @@
         "pages/index/index"
     ],
     "window": {
-        "backgroundTextStyle": "light",
+        "backgroundColor": "#ff0000",
         "navigationBarBackgroundColor": "#d43c33",
         "navigationBarTitleText": "硅谷云音乐",
         "navigationBarTextStyle": "white"

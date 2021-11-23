@@ -54,6 +54,7 @@
     height = 屏幕100%高度 - header高度 - nav高度 - videoList的padding-top
   */
   height:calc(100vh - 74rpx - 100rpx - 40rpx);
+  /* height:calc(100vh - 74rpx - 40rpx); */
 }
 
 .videoList .common {

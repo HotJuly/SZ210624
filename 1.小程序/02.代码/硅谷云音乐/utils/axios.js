@@ -26,7 +26,6 @@ export default function(url,data={},method="GET"){
                 cookie:wx.getStorageSync('cookie')
             },
             success:(res)=>{
-                // console.log(res)
                 /*
                     由于小程序不会自动保存cookie,所以此处手动实现
                     1.必须是以MUSIC_U开头的才行

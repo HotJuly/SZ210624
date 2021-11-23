@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        /*
+            async关键字只能管理当前函数内部的代码
+            async函数一定会返回一个全新的promise对象
+                状态变化
+                    pending
+                    resolved
+                        只要async函数的代码正常执行结束,返回的promise对象会自动变成成功
+                        如果返回的是数据,那么该数据会变成promise对象的result
+                    rejected
+                        如果async函数的代码出现报错,返回的promise对象会自动变为失败
+
+        
+        */
+        let p1;
+        async function a(){
+            console.log(3)
+            p1 =  new Promise((resolve)=>{
+                console.log(4)
+                setTimeout(()=>{
+                    console.log(5)
+                    resolve();
+                },0)
+            });
+            await p1
+            throw new Error('xixi');
+            console.log(6)
+
+            // return 123;
+        }
+
+        console.log(1)
+        const b = a();
+        console.log(2,b)
+    </script>
+</body>
+</html>
