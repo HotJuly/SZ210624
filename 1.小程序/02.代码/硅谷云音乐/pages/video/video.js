@@ -16,7 +16,29 @@ Page({
         videoList:[],
 
         // 用于控制scroll-view组件下拉刷新动画的状态
-        isTrigger:false
+        isTrigger:false,
+
+        // 用于控制video组件的显示
+        currentId:null
+    },
+
+    // 用于监视用户点击图片操作,自动切换显示对应的video组件
+    handleChange(event){
+        const currentId = event.currentTarget.id;
+        // console.log(id)
+        // setData可以传入第二个实参,数据类型为函数
+        // 这个函数会在视图更新之后,才会调用,类似于Vue的$nextTick
+        this.setData({
+            currentId
+        },()=>{
+            
+            // 1.创建获得video上下文对象
+            const videoContext = wx.createVideoContext(currentId);
+            
+            // 2.调用暂停视频的API
+            videoContext.play()
+        })
+
     },
 
     // 用于监视用户上拉视频列表区域触底操作

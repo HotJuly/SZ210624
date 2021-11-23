@@ -39,11 +39,21 @@
     wx:key="vid"
     >
       <video 
+      wx:if="{{currentId===item.vid}}"
       id="{{item.vid}}"
       class="common" 
       src="{{item.urlInfo.url}}"
       bindplay="handlePlay"
       ></video>
+
+      <image
+      wx:else
+      id="{{item.vid}}"
+      class="common"
+      src="{{item.coverUrl}}"
+      bindtap="handleChange"
+      ></image>
+
       <view class="content">{{item.title}}</view>
       <view class="footer">
         <image class="avatar" src="{{item.creator.avatarUrl}}"></image>

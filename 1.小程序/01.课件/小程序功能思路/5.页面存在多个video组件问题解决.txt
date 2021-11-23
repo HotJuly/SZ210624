@@ -1,0 +1,29 @@
+问题:页面存在多个video组件,导致请求资源过大,需要的时间较长
+	video组件只要具有src属性,会立马请求该资源
+
+解决:将页面上的video组件替换成image组件,较少资源的请求量
+
+问题:image只能看,不能播放
+原因:image组件只能展示图片,没有播放视频的功能
+
+需求:当用户点击图片时,需要自动播放对应的视频
+拆解:
+	1.当用户点击图片时
+		绑定事件监听,事件名:tap||touchstart
+
+	2.自动播放对应的视频
+		继续拆解:
+			1.如何通过js播放视频
+				 // 1.创建获得video上下文对象
+        				const videoContext = wx.createVideoContext(video组件的id);
+		
+       				// 2.调用暂停视频的API
+        				videoContext.play()
+
+				问题:当前页面上没有video组件,只有image组件(类似于编辑模式切换)
+				解决:
+					将video组件和image组件同时写入wxml模版,但是在特定条件下进行切换即可
+					通过状态currentId控制video和image组件之间的切换
+
+			2.如何找到对应的视频
+				给video和image组件都添加上相同的id属性,当图片被点击时,将currentId更新为image的id属性
