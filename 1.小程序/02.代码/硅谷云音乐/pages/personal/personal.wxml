@@ -60,7 +60,27 @@
     </view>
 
     <view class="playContent">
-        <view class="noData">暂时没有数据</view>
+        <view class="noData" wx:if="{{playList.length===0}}">暂时没有数据</view>
+        <scroll-view 
+        wx:else
+        class="playScroll" 
+        enable-flex 
+        scroll-x>
+          <view 
+          class="playItem"
+          wx:for="{{playList}}"
+          wx:key="id"
+          >
+            <image class="playImg" src="{{item.url}}"></image>
+          </view>
+          
+          <!-- <image 
+          wx:for="{{playList}}"
+          class="playImg" 
+          src="{{item.url}}"
+          wx:key="id"
+          ></image> -->
+        </scroll-view>
       </view>
 
     <view class="cardList">
