@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        .wrap {
+            width: 400px;
+            height: 400px;
+            border: 1px solid;
+            display: flex;
+        }
+
+        .box {
+            width: 100px;
+            height: 100px;
+        }
+
+        .box1 {
+            background-color: red;
+        }
+
+        .box2 {
+            background-color: yellow;
+        }
+
+        .box3 {
+            background-color: blue;
+        }
+
+        .box4 {
+            background-color: green;
+        }
+
+        .box5 {
+            background-color: gray;
+        }
+        .inner{
+            width:100px;
+            height:50px;
+            background-color: black;
+        }
+        /* 
+            当flex的子元素总宽度超过父元素,flex元素会压缩直系子元素
+            但是这个压缩具有下限,最小不能小于当前子元素中的最大元素
+        
+        */
+    </style>
+</head>
+
+<body>
+    <div class="wrap">
+        <div class="box box1"></div>
+        <div class="box box2"></div>
+        <div class="box box3"></div>
+        <div class="box box4"></div>
+        <div class="box box5">
+            <div class="inner">
+
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

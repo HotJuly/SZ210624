@@ -22,8 +22,30 @@ export default function(url,data={},method="GET"){
             url:config.mpHost + url,
             data,
             method,
+            header:{
+                cookie:wx.getStorageSync('cookie')
+            },
             success:(res)=>{
                 // console.log(res)
+                /*
+                    由于小程序不会自动保存cookie,所以此处手动实现
+                    1.必须是以MUSIC_U开头的才行
+                        cookie.indexOf('MUSIC_U') === 0
+                        cookie.startsWith('MUSIC_U')  =>  true
+                    2.必须是登录接口的cookie才保存
+
+                */
+            //    if(url==="/login/cellphone"){
+            if(data._isLogin){
+                const cookies = res.cookies;
+                 wx.setStorageSync("cookie",cookies.find(cookie=>{
+
+                     // console.log(cookie.startsWith('MUSIC_U'))
+
+                     return cookie.startsWith('MUSIC_U')
+                 }))
+            }
+
                 // result= res;
 
                 // res是响应报文对象,res.data是响应体

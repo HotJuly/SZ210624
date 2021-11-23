@@ -43,7 +43,7 @@ Page({
         }
 
         // 4.发送请求
-        const result = await axios("/login/cellphone",{phone,password});
+        const result = await axios("/login/cellphone",{phone,password,_isLogin:true});
 
         // 5.成功做什么,失败做什么
         /*
@@ -55,7 +55,7 @@ Page({
         */
 
         const code = result.code;
-    //    console.log('result',result)
+       console.log('result',result)
         // if(code===200){
         //     wx.showToast({
         //         title:"登陆成功"

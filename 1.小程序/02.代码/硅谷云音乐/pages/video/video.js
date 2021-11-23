@@ -10,7 +10,10 @@ Page({
         navList:[],
 
         // 用于记录当前用户点击的导航选项
-        navId:58100
+        navId:null,
+
+        // 用于存储视频列表数据
+        videoList:[]
     },
 
     // 用于监视用户点击导航选项,控制下划线切换
@@ -48,7 +51,17 @@ Page({
         const result = await axios('/video/group/list');
 
         this.setData({
-            navList:result.data.slice(0,14)
+            navList:result.data.slice(0,14),
+            navId:result.data[0].id
+        })
+
+        // console.log('navId',this.data.navId)
+        const result2 = await axios('/video/group',{id:this.data.navId})
+        // console.log('result2',result2)
+        this.setData({
+            videoList:result2.datas.map((item)=>{
+                return item.data
+            })
         })
     },
 
