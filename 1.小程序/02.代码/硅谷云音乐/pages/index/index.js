@@ -16,6 +16,13 @@ Page({
         topList:[]
     },
 
+    // 用于跳转每日推荐页面
+    toRecommendSong(){
+        wx.navigateTo({
+          url: '/pages/recommendSong/recommendSong',
+        })
+    },
+
     /**
      * 生命周期函数--监听页面加载
      */

@@ -1,5 +1,6 @@
 // pages/video/video.js
 import axios from '../../utils/axios';
+import hasPermission from '../../utils/hasPermission';
 Page({
 
     /**
@@ -140,7 +141,7 @@ Page({
      * 生命周期函数--监听页面加载
      */
     onLoad: function (options) {
-
+        console.log('onLoad')
     },
 
     /**
@@ -154,6 +155,42 @@ Page({
      * 生命周期函数--监听页面显示
      */
     onShow:async function () {
+
+        // 如果用户没有登录,后续代码不需要执行
+        // 同时弹出模态对话框,提示用户并引导用户跳转登录
+        // 1.判断用户是否已经登录
+        // if(!wx.getStorageSync('cookie')){
+        //     wx.showModal({
+        //         title:"请先登录",
+        //         content:"该功能需要登陆才能使用",
+        //         confirmText:"去登录",
+        //         cancelText:"回到首页",
+        //         success({confirm}){
+        //             // 无论是点击确定还是取消都会来到成功回调
+        //             // console.log('success',data)
+
+        //             if(confirm){
+        //                 // 能进入当前判断,说明用户点击了确定按钮
+        //                 wx.navigateTo({
+        //                   url: '/pages/login/login',
+        //                 })
+        //             }else{
+        //                 // 能进入当前判断,说明用户点击了取消按钮
+        //                 wx.switchTab({
+        //                   url: '/pages/index/index',
+        //                 })
+        //             }
+        //         },
+        //         fail(){
+        //             console.log('fail')
+        //         }
+        //     })
+
+        //     return;
+        // }
+
+        if(!hasPermission())return;
+
         const result = await axios('/video/group/list');
 
         this.setData({
@@ -213,7 +250,30 @@ Page({
     /**
      * 用户点击右上角分享
      */
-    onShareAppMessage: function () {
+    onShareAppMessage: function ({from,target}) {
+        if(from==="button"){
+            // 能进入此处说明当前用户通过button按钮转发
 
+
+            // console.log('target',target)
+            // 问题:由于button组件实现的转发功能,需要转发对应文章的宣传图以及标题
+            // 可以通过button组件添加自定义属性,再配合实参中的target属性来获取数据
+
+            // 注意:自定义属性不支持驼峰命名法
+
+            const {title,imageurl:imageUrl} = target.dataset;
+            return{
+                title,
+                path:"/pages/video/video",
+                imageUrl
+            }
+        }else if(from==="menu"){
+            // 能进入此处说明当前用户通过右上角彩蛋转发
+            return{
+                title:"硅谷云音乐",
+                path:"/pages/index/index",
+                imageUrl:"/static/images/dazuo.jpeg"
+            }
+        }
     }
 })
