@@ -4,7 +4,8 @@
         "pages/index/index",
         "pages/video/video",
         "pages/personal/personal",
-        "pages/login/login"
+        "pages/login/login",
+        "pages/song/song"
     ],
     "window": {
         "backgroundColor": "#ff0000",
@@ -36,6 +37,7 @@
             }
         ]
     },
+    "requiredBackgroundModes": ["audio"],
     "style": "v2",
     "sitemapLocation": "sitemap.json"
 }

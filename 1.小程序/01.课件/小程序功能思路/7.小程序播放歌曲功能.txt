@@ -1,0 +1,24 @@
+需求:当用户点击播放按钮时,需要让页面自动进入播放状态
+拆解:
+	1.当用户点击播放按钮时
+		绑定事件监听,事件名:tap||touchstart
+
+	2.如何让页面自动进入播放状态
+		继续拆解:
+			1.如何通过js播放歌曲
+				想要播放歌曲有两种渠道:
+					使用audio组件进行播放
+						由于audio组件是写在当前页面中的,如果离开当前页面,该组件会被卸载,导致无法继续播放音频
+					使用背景音频进行播放
+						背景音频的优点,离开当前页面,甚至小程序(将小程序收入后台),还能继续播放音频
+
+				使用流程:
+					1.获取到全局唯一的背景音频管理器
+						const backgroundAudioManager = wx.getBackgroundAudioManager();
+					2.给背景音频管理器对象添加src和title属性,就可以实现自动播放歌曲功能
+						backgroundAudioManager.src="链接"
+        						backgroundAudioManager.title  ="音频标题"
+						注意:此处文档写的略差,必须具有src和title才能正常播放音频
+
+			2.如何让页面C3效果进入播放状态
+				只需要给songContainer元素添加isplay类名即可

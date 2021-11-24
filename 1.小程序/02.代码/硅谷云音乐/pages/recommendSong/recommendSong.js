@@ -14,6 +14,19 @@ Page({
         recommendList:[]
     },
 
+    // 用于跳转song页面操作
+    toSong(event){
+
+        // console.log(event.currentTarget.dataset.song)
+        // const song = event.currentTarget.dataset.song;
+
+        const songId = event.currentTarget.dataset.songid
+        // 小程序只支持路由query传参
+        wx.navigateTo({
+          url: '/pages/song/song?songId='+songId,
+        })
+    },
+
     /**
      * 生命周期函数--监听页面加载
      */
