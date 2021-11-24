@@ -1,4 +1,5 @@
 // pages/recommendSong/recommendSong.js
+import PubSub from 'pubsub-js';
 import axios from '../../utils/axios';
 import hasPermission from '../../utils/hasPermission';
 Page({
@@ -11,7 +12,10 @@ Page({
         month:"--",
 
         // 用于存储显示页面的推荐歌曲列表
-        recommendList:[]
+        recommendList:[],
+
+        // 用于存储当前用户进入的歌曲下标
+        currentIndex:null
     },
 
     // 用于跳转song页面操作
@@ -20,7 +24,15 @@ Page({
         // console.log(event.currentTarget.dataset.song)
         // const song = event.currentTarget.dataset.song;
 
-        const songId = event.currentTarget.dataset.songid
+        const songId = event.currentTarget.dataset.songid;
+
+        // 记录当前用户点击的是哪一首歌,用于后续切歌功能
+        const currentIndex = event.currentTarget.dataset.index;
+
+        this.setData({
+            currentIndex
+        })
+
         // 小程序只支持路由query传参
         wx.navigateTo({
           url: '/pages/song/song?songId='+songId,
@@ -46,6 +58,40 @@ Page({
         // console.log('result',result)
         this.setData({
             recommendList:result.recommend
+        })
+
+        PubSub.subscribe("switchType",(msg,type)=>{
+            // PubSub订阅函数的第一个参数一定是消息名称,第二个才是传递的数据
+            // console.log('switchType',msg,type)
+
+            let {recommendList,currentIndex} = this.data;
+            if(type==="next"){
+                // 能进入该判断,说明用户点击了下一首
+                // 如果当前已经是最后一首歌,那么回到第一首
+                if(currentIndex===recommendList.length-1){
+                    currentIndex=0;
+                }else{
+                    currentIndex++;
+                }
+            }else{
+                // 能进入该判断,说明用户点击了上一首
+                if(currentIndex===0){
+                    currentIndex=recommendList.length-1;
+                }else{
+                    currentIndex--;
+                }
+            }
+
+            // 通过下标配合推荐列表成功找到对应歌曲id
+            const songId = recommendList[currentIndex].id;
+            console.log('songId',songId)
+
+            PubSub.publish('sendId',songId)
+
+            this.setData({
+                currentIndex
+            })
+            // console.log('switchType',recommendList[currentIndex].id)
         })
     },
 
