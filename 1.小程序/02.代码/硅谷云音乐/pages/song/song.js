@@ -49,25 +49,6 @@ Page({
 
     // 用于监视用户点击上下首操作,并实现切歌功能
     switchType(event){
-        PubSub.subscribe('sendId',async (msg,songId)=>{
-            // console.log('sendId',msg,songId)
-            this.setData({
-                songId
-            })
-
-            // 根据最新的歌曲id,请求最新的歌曲详情和歌曲链接,并进行播放
-            this.getMusicDetail();
-
-            await this.getMusicUrl();
-
-            // 2.给背景音频管理器对象添加src属性,就可以实现自动播放歌曲功能
-            this.backgroundAudioManager.src  = this.data.musicUrl
-            this.backgroundAudioManager.title  = this.data.songObj.name
-
-            this.setData({
-                isPlay:true
-            })
-        })
 
         // 获取到当前用户的操作标识
         const type = event.currentTarget.id;
@@ -75,8 +56,12 @@ Page({
     },
 
     // 用于监视用户点击播放按钮操作
-    handlePlay(){
+    async handlePlay(){
         // console.log('handlePlay')
+
+        if(!this.data.musicUrl){
+            await this.getMusicUrl();
+        }
         
             
         // 1.获取到全局唯一的背景音频管理器
@@ -130,7 +115,6 @@ Page({
 
         this.getMusicDetail();
 
-        this.getMusicUrl();
 
         // console.log('appInstance1',appInstance.a.msg)
         // appInstance.a.msg = "我是全局修改之后的数据"
@@ -138,13 +122,37 @@ Page({
 
         // 如果背景音频正在播放的歌曲和当前显示的歌曲是同一首歌
         const {audioId,playState} = appInstance.globalData;
-        if(playState&&audioId===this.data.songId){
+        // console.log(audioId,this.data.songId)
+        if(playState&&audioId===this.data.songId*1){
             this.setData({
                 isPlay:true
             })
         }
 
-        console.log('PubSub',PubSub)
+        // console.log('PubSub',PubSub)
+        
+        this.token = PubSub.subscribe('sendId',async (msg,songId)=>{
+            // console.log('sendId',msg,songId)
+            this.setData({
+                songId
+            })
+
+            // 根据最新的歌曲id,请求最新的歌曲详情和歌曲链接,并进行播放
+            this.getMusicDetail();
+
+            await this.getMusicUrl();
+
+            // 2.给背景音频管理器对象添加src属性,就可以实现自动播放歌曲功能
+            this.backgroundAudioManager.src  = this.data.musicUrl
+            this.backgroundAudioManager.title  = this.data.songObj.name
+
+            appInstance.globalData.audioId = this.data.songId;
+            appInstance.globalData.playState = true;
+
+            this.setData({
+                isPlay:true
+            })
+        })
     },
 
     /**
@@ -172,7 +180,7 @@ Page({
      * 生命周期函数--监听页面卸载
      */
     onUnload: function () {
-
+        PubSub.unsubscribe(this.token)
     },
 
     /**
