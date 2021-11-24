@@ -1,5 +1,8 @@
 // pages/song/song.js
+import PubSub from 'pubsub-js';
 import axios from '../../utils/axios';
+
+let appInstance = getApp();
 Page({
 
     /**
@@ -9,6 +12,9 @@ Page({
 
         // 用于存储当前页面歌曲详细信息
         songObj:{},
+
+        // 用于存储当前页面歌曲Id,
+        songId:null,
 
         // 用于存储当前页面的播放状态
         isPlay:false,
@@ -31,10 +37,18 @@ Page({
         if(this.data.isPlay){
             // 能进入该判断,说明当前页面正在播放音频
             backgroundAudioManager.pause(); 
+
+            // 缓存当前背景音频的播放歌曲Id,留作后续进入页面判断使用
+            appInstance.globalData.playState = false;
         }else{
             // 2.给背景音频管理器对象添加src属性,就可以实现自动播放歌曲功能
             backgroundAudioManager.src  = this.data.musicUrl
             backgroundAudioManager.title  = this.data.songObj.name
+
+            // 缓存当前背景音频的播放状态,留作后续进入页面判断使用
+            appInstance.globalData.audioId = this.data.songId;
+            // 缓存当前背景音频的播放歌曲Id,留作后续进入页面判断使用
+            appInstance.globalData.playState = true;
         }
 
         this.setData({
@@ -56,6 +70,10 @@ Page({
         // 从options对象中获取到query传参传递过来的歌曲id
         const {songId} = options;
 
+        this.setData({
+            songId
+        })
+
         const result = await axios("/song/detail",{ids:songId});
         // console.log(result)
 
@@ -75,7 +93,19 @@ Page({
             musicUrl:result1.data[0].url
         })
 
-        
+        // console.log('appInstance1',appInstance.a.msg)
+        // appInstance.a.msg = "我是全局修改之后的数据"
+        // console.log('appInstance2',appInstance.a.msg)
+
+        // 如果背景音频正在播放的歌曲和当前显示的歌曲是同一首歌
+        const {audioId,playState} = appInstance.globalData;
+        if(playState&&audioId===this.data.songId){
+            this.setData({
+                isPlay:true
+            })
+        }
+
+        console.log('PubSub',PubSub)
     },
 
     /**
