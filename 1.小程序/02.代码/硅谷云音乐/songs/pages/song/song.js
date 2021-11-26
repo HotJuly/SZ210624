@@ -1,7 +1,7 @@
 // pages/song/song.js
 import PubSub from 'pubsub-js';
 import moment from 'moment';
-import axios from '../../utils/axios';
+import axios from '../../../utils/axios';
 
 let appInstance = getApp();
 Page({

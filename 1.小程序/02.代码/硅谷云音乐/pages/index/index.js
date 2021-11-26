@@ -19,7 +19,7 @@ Page({
     // 用于跳转每日推荐页面
     toRecommendSong(){
         wx.navigateTo({
-          url: '/pages/recommendSong/recommendSong',
+          url: '/songs/pages/recommendSong/recommendSong',
         })
     },
 

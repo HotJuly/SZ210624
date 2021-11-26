@@ -1,7 +1,7 @@
 // pages/recommendSong/recommendSong.js
 import PubSub from 'pubsub-js';
-import axios from '../../utils/axios';
-import hasPermission from '../../utils/hasPermission';
+import axios from '../../../utils/axios';
+import hasPermission from '../../../utils/hasPermission';
 Page({
 
     /**
@@ -35,7 +35,7 @@ Page({
 
         // 小程序只支持路由query传参
         wx.navigateTo({
-          url: '/pages/song/song?songId='+songId,
+          url: '/songs/pages/song/song?songId='+songId,
         })
     },
 
