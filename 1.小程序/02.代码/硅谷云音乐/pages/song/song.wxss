@@ -104,32 +104,31 @@
 }
 
 /* 进度条样式开始 */
-.barContainer{
+.playContainer{
   display:flex;
-  align-items:center;
+  align-items: center;
 }
 
-.barContainer .wrap{
+.playContainer .wrap{
   width:450rpx;
   height:4rpx;
-  background:rgba(0,0,0,0.5);
+  background: #666;
   margin:0 20rpx;
 }
 
-.barContainer .wrap .inner{
-  position: relative;
-  width:0%;
+.playContainer .wrap .inner{
+  position:relative;
   height:100%;
-  background: red;
+  background-color: red;
 }
 
-.barContainer .wrap .inner .point{
-  position: absolute;
-  width: 12rpx;
+.playContainer .wrap .inner .point{
+  position:absolute;
+  width:12rpx;
   height:12rpx;
+  border-radius: 50%;
+  background-color: white;
   right:-6rpx;
   top:-4rpx;
-  background:white;
-  border-radius: 50%;
 }
 /* 进度条样式结束 */

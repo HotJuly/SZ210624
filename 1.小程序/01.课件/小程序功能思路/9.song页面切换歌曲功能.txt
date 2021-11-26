@@ -37,6 +37,7 @@
 							PubSub
 								订阅	PubSub.subscribe(消息名称,接收数据的回调函数)
 								发布	PubSub.publish(消息名称,需要发布的数据)
+								解绑	PubSub.unsubscribe(token)
 
 					需求:song页面需要从每日推荐页面知道下一首歌的数据
 							订阅者	song页面

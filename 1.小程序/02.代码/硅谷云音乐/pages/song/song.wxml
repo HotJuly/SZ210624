@@ -7,6 +7,17 @@
     <image class="bigImg" src="{{songObj.al.picUrl}}"></image>
   </view>
 
+  <!-- 进度条区域 -->
+  <view class="playContainer">
+    <text class="currentTime">{{currentTime}}</text>
+    <view class="wrap">
+      <view class="inner" style="width:{{currentWidth}}%">
+        <view class="point"></view>
+      </view>
+    </view>
+    <text class="durationTime">{{durationTime}}</text>
+  </view>
+
   <!-- 音乐控制器 -->
   <view class="musicControl">
     <text class="iconfont icon-iconsMusicyemianbofangmoshiShuffle" ></text>

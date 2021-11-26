@@ -1,5 +1,6 @@
 // pages/song/song.js
 import PubSub from 'pubsub-js';
+import moment from 'moment';
 import axios from '../../utils/axios';
 
 let appInstance = getApp();
@@ -20,7 +21,57 @@ Page({
         isPlay:false,
 
         // 用于存储当前页面歌曲的音频链接
-        musicUrl:""
+        musicUrl:"",
+
+        // 用于存储当前歌曲播放时间
+        currentTime:"00:00",
+
+        // 用于存储当前歌曲总时长
+        durationTime:"--:--",
+
+        // 用于存储当前歌曲进度条宽度
+        currentWidth:0
+    },
+
+    // 用于绑定与背景音频相关的事件
+    addEvent(){
+        // 用于监视背景音频播放事件
+        this.backgroundAudioManager.onPlay(()=>{
+            // console.log('onPlay')
+
+            // 缓存当前背景音频的歌曲播放状态,留作后续进入页面判断使用
+            appInstance.globalData.playState = true;
+
+            this.setData({
+                isPlay:true
+            })
+        })
+
+        // 用于监视背景音频暂停事件
+        this.backgroundAudioManager.onPause(()=>{
+            // console.log('onPause')
+
+            // 缓存当前背景音频的歌曲播放状态,留作后续进入页面判断使用
+            appInstance.globalData.playState = false;
+            this.setData({
+                isPlay:false
+            })
+        })
+
+        // 用于监视背景音频进度更新事件
+        this.backgroundAudioManager.onTimeUpdate(()=>{
+            // console.log('onTimeUpdate',moment(this.backgroundAudioManager.currentTime*1000).format("mm:ss"))
+
+            const currentTime = this.backgroundAudioManager.currentTime*1000;
+
+            const durationTime = this.data.songObj.dt;
+
+            const currentWidth = currentTime/durationTime*100;
+            this.setData({
+                currentTime:moment(this.backgroundAudioManager.currentTime*1000).format("mm:ss"),
+                currentWidth
+            })
+        })
     },
 
     // 专门用于请求当前歌曲的音频链接
@@ -38,7 +89,8 @@ Page({
         // console.log(result)
 
         this.setData({
-            songObj:result.songs[0]
+            songObj:result.songs[0],
+            durationTime:moment(result.songs[0].dt).format("mm:ss")
         })
 
         // 由于当前的页面标题,只有等到请求成功之后才能确定,所以需要使用动态注入的方法实现
@@ -123,7 +175,7 @@ Page({
         // 如果背景音频正在播放的歌曲和当前显示的歌曲是同一首歌
         const {audioId,playState} = appInstance.globalData;
         // console.log(audioId,this.data.songId)
-        if(playState&&audioId===this.data.songId*1){
+        if(playState&&audioId==this.data.songId){
             this.setData({
                 isPlay:true
             })
@@ -153,6 +205,8 @@ Page({
                 isPlay:true
             })
         })
+
+        this.addEvent();
     },
 
     /**
