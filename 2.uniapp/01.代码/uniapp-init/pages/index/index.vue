@@ -16,9 +16,14 @@
 		</view>
 		
 		<!-- 导航区域 -->
-		<scroll-view class="navScroll" enable-flex scroll-x >
+		<scroll-view class="navScroll" 
+			v-if="indexData.kingKongModule"  
+			enable-flex 
+			scroll-x >
 			<view class="navItem active">推荐</view>
-			<view class="navItem" v-for="item in indexData.kingKongModule.kingKongList" :key="item.L1Id">
+			<view class="navItem" 
+			v-for="item in indexData.kingKongModule.kingKongList" 
+			:key="item.L1Id">
 				{{item.text}}
 			</view>
 		</scroll-view>
@@ -44,7 +49,8 @@
 			// console.log('mounted')
 			// uniapp兼容小程序所有的API
 			uni.request({
-				url:"http://localhost:3005/getIndexData",
+				url:"/api/getIndexData",
+				// url:"http://localhost:3005/getIndexData",
 				success:(res)=>{
 					// console.log('res',res)
 					this.indexData = res.data;

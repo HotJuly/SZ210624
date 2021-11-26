@@ -159,6 +159,11 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
 var _default =
 {
   data: function data() {
@@ -177,7 +182,8 @@ var _default =
     // console.log('mounted')
     // uniapp兼容小程序所有的API
     uni.request({
-      url: "http://localhost:3005/getIndexData",
+      url: "/api/getIndexData",
+      // url:"http://localhost:3005/getIndexData",
       success: function success(res) {
         // console.log('res',res)
         _this.indexData = res.data;

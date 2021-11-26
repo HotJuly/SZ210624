@@ -71,5 +71,13 @@
     },
     "mp-toutiao" : {
         "usingComponents" : true
-    }
+    },
+	"h5":{
+		"devServer":{
+			"/api": {
+			    "target": "http://localhost:3005",
+			    "pathRewrite": {"^/api" : ""}
+			  }
+		}
+	}
 }

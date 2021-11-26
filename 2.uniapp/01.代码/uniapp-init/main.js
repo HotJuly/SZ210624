@@ -9,16 +9,16 @@ Vue.config.productionTip = false
 App.mpType = 'app'
 
 const app = new Vue({
-    // ...App
+    ...App
 	
-	onLaunch: function() {
-		console.log('App Launch')
-	},
-	onShow: function() {
-		console.log('App Show')
-	},
-	onHide: function() {
-		console.log('App Hide')
-	}
+	// onLaunch: function() {
+	// 	console.log('App Launch')
+	// },
+	// onShow: function() {
+	// 	console.log('App Show')
+	// },
+	// onHide: function() {
+	// 	console.log('App Hide')
+	// }
 })
 app.$mount()
