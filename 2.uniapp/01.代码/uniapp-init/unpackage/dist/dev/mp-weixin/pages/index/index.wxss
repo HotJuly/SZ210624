@@ -56,4 +56,18 @@
       -ms-flex-negative: 0;
           flex-shrink: 0;
 }
+.indexContainer .navScroll {
+  white-space: nowrap;
+}
+.indexContainer .navScroll .navItem {
+  display: inline-block;
+  width: 140rpx;
+  height: 80rpx;
+  font-size: 28rpx;
+  text-align: center;
+  line-height: 80rpx;
+}
+.indexContainer .navScroll .navItem.active {
+  border-bottom: 4rpx solid #f00;
+}
 

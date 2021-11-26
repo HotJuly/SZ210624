@@ -14,17 +14,43 @@
 			</view>
 			<button class="username">七月</button>
 		</view>
+		
+		<!-- 导航区域 -->
+		<scroll-view class="navScroll" enable-flex scroll-x >
+			<view class="navItem active">推荐</view>
+			<view class="navItem" v-for="item in indexData.kingKongModule.kingKongList" :key="item.L1Id">
+				{{item.text}}
+			</view>
+		</scroll-view>
+		123
 	</view>
 </template>
 
 <script>
 	export default {
 		data() {
-			return {}
-		}
-		,
-		onLoad() {}
-		,
+			return {
+				indexData:{}
+			}
+		},
+		// uniapp兼容小程序和Vue的生命周期,使用哪种都可以,建议使用Vue的
+		// created(){
+		// 	console.log('created')
+		// },
+		// onLoad() {
+		// 	console.log('onLoad')
+		// },
+		mounted(){
+			// console.log('mounted')
+			// uniapp兼容小程序所有的API
+			uni.request({
+				url:"http://localhost:3005/getIndexData",
+				success:(res)=>{
+					// console.log('res',res)
+					this.indexData = res.data;
+				}
+			})
+		},
 		methods:{}
 		
 	}
@@ -71,4 +97,16 @@
 			font-size 24upx
 			margin 0 20upx
 			flex-shrink  0
+	.navScroll
+		// display flex
+		white-space nowrap
+		.navItem
+			display inline-block
+			width 140upx
+			height 80upx
+			font-size 28upx
+			text-align center
+			line-height 80upx
+			&.active
+				border-bottom 4upx solid red
 </style>
