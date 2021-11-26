@@ -1,0 +1,5 @@
+UNIAPP文件								小程序文件
+manifest.json(小程序APPID填入,检查安全域名别勾选)					project.config.json
+pages.json(具有pages属性,用于声明当前项目页面,注意:该文件相当于所有页面的配置+全局配置)	app.json
+main.js+App.vue(注册小程序实例)						app.js+app.wxss
+index.vue									index.js+index.wxss+index.wxml
