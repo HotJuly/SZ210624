@@ -28,38 +28,18 @@
 			</view>
 		</scroll-view>
 		
-		<swiper class="bannerSwiper" :indicator-dots="true" :autoplay="true" :interval="3000" :duration="1000">
-			<swiper-item>
-				<view class="swiper-item">
-					<image class="bannerImg" src="/static/images/index/1.webp" mode=""></image>
-				</view>
-			</swiper-item>
-			<swiper-item>
-				<view class="swiper-item">
-					<image class="bannerImg"  src="/static/images/index/2.webp" mode=""></image>
-				</view>
-			</swiper-item>
-			<swiper-item>
-				<view class="swiper-item">
-					<image class="bannerImg"  src="/static/images/index/3.webp" mode=""></image>
-				</view>
-			</swiper-item>
-		</swiper>
-		
-		<Categorys 
-		v-for="(categoryObj,index) in indexData.categoryModule" 
-		:key="index"
-		:categoryObj="categoryObj"
-		></Categorys>
+		<scroll-view class="contentContainer" scroll-y="true" >
+			<Recommend></Recommend>
+		</scroll-view>
 	</view>
 </template>
 
 <script>
 	import {mapState} from 'vuex';
-	import Categorys from '../../components/categorys/categorys.vue';
+	import Recommend from '../../components/Recommend/Recommend.vue';
 	import axios from '../../utils/axios.js';
 	export default {
-		components:{Categorys},
+		components:{Recommend},
 		data() {
 			return {
 				// indexData:{}
@@ -85,18 +65,22 @@
 			// })
 			// const result = await axios('/getIndexData');
 			// this.indexData = result;
+			// this.$store.dispatch('home/getIndexData');
 			this.$store.dispatch('getIndexData');
 			// console.log(this.$store.state.home.initData)
+			// console.log(this.indexData)
 		},
 		methods:{},
 		computed:{
 			// indexData(){
 			// 	return this.$store.state.home.indexData
 			// },
+			// ...mapState(["indexData"])
 			...mapState({
 				// indexData:(state)=>{return state.home.indexData}
 				indexData:state=>state.home.indexData
-			})
+			}),
+			// ...mapState("home",["indexData"])
 		}
 		
 	}
@@ -155,10 +139,15 @@
 			line-height 80upx
 			&.active
 				border-bottom 4upx solid red
-	.bannerSwiper
-		.swiper-item
-			height 100%
-			.bannerImg
-				width 100%
-				height 100%
+	.contentContainer
+		// 小程序端height = 屏幕100%height - header高度 - nav高度
+		// h5端height = 屏幕100%height - header高度 - nav高度 - 导航栏高度 - tabBar高度
+		// /* #ifdef MP-WEIXIN */
+		// height calc(100vh - 100upx - 84upx)
+		// /* #endif */
+		// /* #ifdef H5 */
+		// height calc(100vh - 100upx - 84upx - 100upx - 88upx)
+		// /* #endif */
+		
+		height calc(100vh - 100upx - 84upx - var(--window-top) - var(--window-bottom))
 </style>

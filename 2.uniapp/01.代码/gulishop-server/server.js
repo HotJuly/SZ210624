@@ -39,6 +39,13 @@ router.get('/getIndexData',function(ctx,next){
 	// console.log('/test success')
 	ctx.body = indexData
 })
+
+// 用于返回分类页面数据的接口
+const categoryDatas = require('./datas/categoryDatas.json');
+router.get('/getCategoryDatas',function(ctx,next){
+	// console.log('/test success')
+	ctx.body = categoryDatas
+})
 	
 
 // 2.将服务器应用实例运行到某个指定端口,并监听该端口

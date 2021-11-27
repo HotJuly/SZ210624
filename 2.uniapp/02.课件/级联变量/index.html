@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        :root{
+            --global-color:blue
+        }
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        .box{
+            width: 200px;
+            height: 200px;
+            border :1px solid ;
+        }
+        .box1{
+            background-color: var(--global-color);
+        }
+        .box2{
+            color: var(--global-color);
+            border-color: var(--global-color);
+        }
+    </style>
+</head>
+<body>
+    <div class="box box1">
+        box1
+    </div>
+    <div class="box box2">
+        box2
+    </div>
+    <button id="btn">变绿</button>
+    <script>
+        btn.onclick=function(){
+            document.documentElement.style.setProperty("--global-color","green");
+        }
+    </script>
+</body>
+</html>
