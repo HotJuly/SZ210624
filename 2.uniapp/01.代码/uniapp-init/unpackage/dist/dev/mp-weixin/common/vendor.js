@@ -8400,7 +8400,7 @@ module.exports = {"_from":"@dcloudio/uni-stat@next","_id":"@dcloudio/uni-stat@2.
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var _default = { "pages": { "pages/index/index": { "navigationBarTitleText": "首页", "usingComponents": { "recommend": "/components/Recommend/Recommend" } }, "pages/category/category": { "usingComponents": {} }, "pages/cart/cart": { "usingComponents": {} }, "pages/personal/personal": { "usingComponents": {} } }, "globalStyle": { "navigationBarTextStyle": "white", "navigationBarTitleText": "gulishop", "navigationBarBackgroundColor": "#BB2C08", "backgroundColor": "#F8F8F8" } };exports.default = _default;
+Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var _default = { "pages": { "pages/personal/personal": {}, "pages/index/index": { "navigationBarTitleText": "首页" }, "pages/category/category": {}, "pages/cart/cart": {}, "pages/login/login": {} }, "globalStyle": { "navigationBarTextStyle": "white", "navigationBarTitleText": "gulishop", "navigationBarBackgroundColor": "#BB2C08", "backgroundColor": "#F8F8F8" } };exports.default = _default;
 
 /***/ }),
 /* 8 */
@@ -8527,6 +8527,75 @@ function normalizeComponent (
 /***/ }),
 /* 15 */
 /*!*******************************************************************************!*\
+  !*** C:/Users/CHH/Desktop/SZ210624/2.uniapp/01.代码/uniapp-init/utils/axios.js ***!
+  \*******************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = _default;
+
+
+
+
+
+var _config = _interopRequireDefault(__webpack_require__(/*! ./config.js */ 16));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };} /*
+                                                                                                                                                           	需求:由于uniapp具有同时打包成多端项目的特点,
+                                                                                                                                                           		如果运行环境是h5,此时的基础路径应该是代理规则字符串/api
+                                                                                                                                                           		如果运行环境是小程序,此时的基础路径应该是http://localhost:3005
+                                                                                                                                                           
+                                                                                                                                                           */var baseUrl; // 方案一:
+// 通过该属性可以获取到当前运行环境
+// const platform = uni.getSystemInfoSync().platform;
+// if(platform==="ios"){
+// 	// 能进入这里说明当前运行环境是h5
+// 	baseUrl="/api"
+// }else if(platform==="devtools"){
+// 	// 能进入这里说明当前运行环境是小程序
+// 	baseUrl="http://localhost:3005"
+// }
+
+// 方案二:条件编译
+
+
+
+
+
+baseUrl = _config.default.mpHost;
+
+
+
+function _default(url) {var data = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};var method = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : "GET";
+  return new Promise(function (resolve, reject) {
+    uni.request({
+      // url:"/api/getIndexData",
+      url: baseUrl + url,
+      data: data,
+      method: method,
+      success: function success(res) {
+        resolve(res.data);
+      } });
+
+  });
+}
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
+
+/***/ }),
+/* 16 */
+/*!********************************************************************************!*\
+  !*** C:/Users/CHH/Desktop/SZ210624/2.uniapp/01.代码/uniapp-init/utils/config.js ***!
+  \********************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var _default = {
+  mpHost: "http://localhost:3005",
+  h5Host: "/api" };exports.default = _default;
+
+/***/ }),
+/* 17 */
+/*!*******************************************************************************!*\
   !*** C:/Users/CHH/Desktop/SZ210624/2.uniapp/01.代码/uniapp-init/store/index.js ***!
   \*******************************************************************************/
 /*! no static exports found */
@@ -8534,8 +8603,8 @@ function normalizeComponent (
 
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var _vue = _interopRequireDefault(__webpack_require__(/*! vue */ 2));
-var _vuex = _interopRequireDefault(__webpack_require__(/*! vuex */ 16));
-var _home = _interopRequireDefault(__webpack_require__(/*! ./modules/home */ 17));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
+var _vuex = _interopRequireDefault(__webpack_require__(/*! vuex */ 18));
+var _home = _interopRequireDefault(__webpack_require__(/*! ./modules/home */ 19));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
 
 _vue.default.use(_vuex.default);var _default =
 
@@ -8544,7 +8613,7 @@ new _vuex.default.Store({
     home: _home.default } });exports.default = _default;
 
 /***/ }),
-/* 16 */
+/* 18 */
 /*!********************************************!*\
   !*** ./node_modules/vuex/dist/vuex.esm.js ***!
   \********************************************/
@@ -9494,7 +9563,7 @@ var index_esm = {
 
 
 /***/ }),
-/* 17 */
+/* 19 */
 /*!**************************************************************************************!*\
   !*** C:/Users/CHH/Desktop/SZ210624/2.uniapp/01.代码/uniapp-init/store/modules/home.js ***!
   \**************************************************************************************/
@@ -9502,7 +9571,7 @@ var index_esm = {
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var _regenerator = _interopRequireDefault(__webpack_require__(/*! ./node_modules/@babel/runtime/regenerator */ 18));var _axios = _interopRequireDefault(__webpack_require__(/*! ../../utils/axios */ 21));
+Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var _regenerator = _interopRequireDefault(__webpack_require__(/*! ./node_modules/@babel/runtime/regenerator */ 20));var _axios = _interopRequireDefault(__webpack_require__(/*! ../../utils/axios */ 15));
 var _mutationTypes = __webpack_require__(/*! ../mutation-types */ 23);function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) {try {var info = gen[key](arg);var value = info.value;} catch (error) {reject(error);return;}if (info.done) {resolve(value);} else {Promise.resolve(value).then(_next, _throw);}}function _asyncToGenerator(fn) {return function () {var self = this,args = arguments;return new Promise(function (resolve, reject) {var gen = fn.apply(self, args);function _next(value) {asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value);}function _throw(err) {asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err);}_next(undefined);});};}function _defineProperty(obj, key, value) {if (key in obj) {Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true });} else {obj[key] = value;}return obj;}
 var state = {
   initData: "我是home模块的初始化数据",
@@ -9536,18 +9605,18 @@ var getters = {};var _default =
   getters: getters };exports.default = _default;
 
 /***/ }),
-/* 18 */
+/* 20 */
 /*!**********************************************************!*\
   !*** ./node_modules/@babel/runtime/regenerator/index.js ***!
   \**********************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! regenerator-runtime */ 19);
+module.exports = __webpack_require__(/*! regenerator-runtime */ 21);
 
 
 /***/ }),
-/* 19 */
+/* 21 */
 /*!************************************************************!*\
   !*** ./node_modules/regenerator-runtime/runtime-module.js ***!
   \************************************************************/
@@ -9578,7 +9647,7 @@ var oldRuntime = hadRuntime && g.regeneratorRuntime;
 // Force reevalutation of runtime.js.
 g.regeneratorRuntime = undefined;
 
-module.exports = __webpack_require__(/*! ./runtime */ 20);
+module.exports = __webpack_require__(/*! ./runtime */ 22);
 
 if (hadRuntime) {
   // Restore the original runtime.
@@ -9594,7 +9663,7 @@ if (hadRuntime) {
 
 
 /***/ }),
-/* 20 */
+/* 22 */
 /*!*****************************************************!*\
   !*** ./node_modules/regenerator-runtime/runtime.js ***!
   \*****************************************************/
@@ -10323,75 +10392,6 @@ if (hadRuntime) {
   })() || Function("return this")()
 );
 
-
-/***/ }),
-/* 21 */
-/*!*******************************************************************************!*\
-  !*** C:/Users/CHH/Desktop/SZ210624/2.uniapp/01.代码/uniapp-init/utils/axios.js ***!
-  \*******************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = _default;
-
-
-
-
-
-var _config = _interopRequireDefault(__webpack_require__(/*! ./config.js */ 22));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };} /*
-                                                                                                                                                           	需求:由于uniapp具有同时打包成多端项目的特点,
-                                                                                                                                                           		如果运行环境是h5,此时的基础路径应该是代理规则字符串/api
-                                                                                                                                                           		如果运行环境是小程序,此时的基础路径应该是http://localhost:3005
-                                                                                                                                                           
-                                                                                                                                                           */var baseUrl; // 方案一:
-// 通过该属性可以获取到当前运行环境
-// const platform = uni.getSystemInfoSync().platform;
-// if(platform==="ios"){
-// 	// 能进入这里说明当前运行环境是h5
-// 	baseUrl="/api"
-// }else if(platform==="devtools"){
-// 	// 能进入这里说明当前运行环境是小程序
-// 	baseUrl="http://localhost:3005"
-// }
-
-// 方案二:条件编译
-
-
-
-
-
-baseUrl = _config.default.mpHost;
-
-
-
-function _default(url) {var data = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};var method = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : "GET";
-  return new Promise(function (resolve, reject) {
-    uni.request({
-      // url:"/api/getIndexData",
-      url: baseUrl + url,
-      data: data,
-      method: method,
-      success: function success(res) {
-        resolve(res.data);
-      } });
-
-  });
-}
-/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ 1)["default"]))
-
-/***/ }),
-/* 22 */
-/*!********************************************************************************!*\
-  !*** C:/Users/CHH/Desktop/SZ210624/2.uniapp/01.代码/uniapp-init/utils/config.js ***!
-  \********************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var _default = {
-  mpHost: "http://localhost:3005",
-  h5Host: "/api" };exports.default = _default;
 
 /***/ }),
 /* 23 */
