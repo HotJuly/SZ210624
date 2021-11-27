@@ -32,11 +32,12 @@
 </template>
 
 <script>
+	import {mapState} from 'vuex';
 	import axios from '../../utils/axios.js';
 	export default {
 		data() {
 			return {
-				indexData:{}
+				// indexData:{}
 			}
 		},
 		// uniapp兼容小程序和Vue的生命周期,使用哪种都可以,建议使用Vue的
@@ -57,10 +58,21 @@
 			// 		this.indexData = res.data;
 			// 	}
 			// })
-			const result = await axios('/getIndexData');
-			this.indexData = result;
+			// const result = await axios('/getIndexData');
+			// this.indexData = result;
+			this.$store.dispatch('getIndexData');
+			// console.log(this.$store.state.home.initData)
 		},
-		methods:{}
+		methods:{},
+		computed:{
+			// indexData(){
+			// 	return this.$store.state.home.indexData
+			// },
+			...mapState({
+				// indexData:(state)=>{return state.home.indexData}
+				indexData:state=>state.home.indexData
+			})
+		}
 		
 	}
 		

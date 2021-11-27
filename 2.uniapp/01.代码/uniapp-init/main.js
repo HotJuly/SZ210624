@@ -1,6 +1,8 @@
 import Vue from 'vue'
 import App from './App'
 
+import store from './store'
+
 Vue.config.productionTip = false
 
 // mpType->声明当前App组件为小程序实例
@@ -9,7 +11,8 @@ Vue.config.productionTip = false
 App.mpType = 'app'
 
 const app = new Vue({
-    ...App
+    ...App,
+	store
 	
 	// onLaunch: function() {
 	// 	console.log('App Launch')
