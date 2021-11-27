@@ -32,6 +32,7 @@
 </template>
 
 <script>
+	import axios from '../../utils/axios.js';
 	export default {
 		data() {
 			return {
@@ -45,17 +46,19 @@
 		// onLoad() {
 		// 	console.log('onLoad')
 		// },
-		mounted(){
+		async mounted(){
 			// console.log('mounted')
 			// uniapp兼容小程序所有的API
-			uni.request({
-				url:"/api/getIndexData",
-				// url:"http://localhost:3005/getIndexData",
-				success:(res)=>{
-					// console.log('res',res)
-					this.indexData = res.data;
-				}
-			})
+			// uni.request({
+			// 	// url:"/api/getIndexData",
+			// 	url:"http://localhost:3005/getIndexData",
+			// 	success:(res)=>{
+			// 		// console.log('res',res)
+			// 		this.indexData = res.data;
+			// 	}
+			// })
+			const result = await axios('/getIndexData');
+			this.indexData = result;
 		},
 		methods:{}
 		
