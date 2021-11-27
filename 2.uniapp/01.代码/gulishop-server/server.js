@@ -46,6 +46,18 @@ router.get('/getCategoryDatas',function(ctx,next){
 	// console.log('/test success')
 	ctx.body = categoryDatas
 })
+
+// 用于返回首页的商品分类数据的接口
+const indexCateList = require('./datas/indexCateList.json');
+router.get('/getindexCateList',async function(ctx,next){
+	// console.log('/test success')
+	// koa服务器如果想要异步返回数据,路由回调函数必须返回一个promise对象
+	await new Promise((resolve)=>{
+		setTimeout(resolve,2000)
+	})
+	
+	ctx.body = indexCateList
+})
 	
 
 // 2.将服务器应用实例运行到某个指定端口,并监听该端口

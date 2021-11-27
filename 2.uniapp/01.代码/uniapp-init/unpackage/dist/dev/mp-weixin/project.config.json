@@ -31,7 +31,7 @@
             "outputPath": ""
         },
         "enableEngineNative": false,
-        "useIsolateContext": false,
+        "useIsolateContext": true,
         "userConfirmedBundleSwitch": false,
         "packNpmManually": false,
         "packNpmRelationList": [],
@@ -41,7 +41,7 @@
         "useCompilerPlugins": false
     },
     "compileType": "miniprogram",
-    "libVersion": "2.21.0",
+    "libVersion": "2.7.0",
     "appid": "wxe5931a68ea66cece",
     "projectname": "uniapp-init",
     "condition": {

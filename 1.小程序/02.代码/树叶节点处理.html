@@ -1,15 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
 </head>
-
 <body>
     <script>
+        
         /*
             读取当前树状结构中,所有树节点中最大的value数据
             节点分为两种:树节点和叶节点,
@@ -17,7 +16,7 @@
             叶节点:只有value属性的对象
         */
         const tree = {
-            value:6,
+            value:2,
             children:[
                 {
                     value:5,
@@ -32,3 +31,34 @@
                 }
             ]
         }
+
+        function deep(node){
+            let max = 0;
+
+            function fn(node){
+                if(node.children){
+                    max = node.value>max?node.value:max;
+                    node.children.forEach((item)=>{
+                        fn(item);
+                    })
+                }else{
+                    // 如果判断的是最大的叶节点的value
+                    // max = node.value>max?node.value:max;
+                }
+            }
+            // if(node.children){
+            //     max = node.value>max?node.value:max;
+            //     node.children.forEach((item)=>{
+            //         let num = deep(item);
+            //         // console.log(num)
+            //     })
+            // }
+            fn(node)
+            return max;
+        }
+
+        const max = deep(tree)
+        console.log(max);
+    </script>
+</body>
+</html>

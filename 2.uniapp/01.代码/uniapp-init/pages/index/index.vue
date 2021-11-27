@@ -20,16 +20,23 @@
 			v-if="indexData.kingKongModule"  
 			enable-flex 
 			scroll-x >
-			<view class="navItem active">推荐</view>
+			<view class="navItem"
+			:class="currentIndex===-1?'active':''"
+			@click="changeCurrentIndex(-1)"
+			>推荐</view>
 			<view class="navItem" 
-			v-for="item in indexData.kingKongModule.kingKongList" 
-			:key="item.L1Id">
+			:class="currentIndex===index?'active':''"
+			v-for="(item,index) in indexData.kingKongModule.kingKongList" 
+			:key="item.L1Id"
+			@click="changeCurrentIndex(index)"
+			>
 				{{item.text}}
 			</view>
 		</scroll-view>
 		
 		<scroll-view class="contentContainer" scroll-y="true" >
-			<Recommend></Recommend>
+			<Recommend v-if="currentIndex===-1"></Recommend>
+			<CateList :navIndex="currentIndex" v-else></CateList>
 		</scroll-view>
 	</view>
 </template>
@@ -37,12 +44,17 @@
 <script>
 	import {mapState} from 'vuex';
 	import Recommend from '../../components/Recommend/Recommend.vue';
+	import CateList from '../../components/CateList/CateList.vue';
 	import axios from '../../utils/axios.js';
 	export default {
-		components:{Recommend},
+		components:{
+			Recommend,
+			CateList
+		},
 		data() {
 			return {
 				// indexData:{}
+				currentIndex:-1
 			}
 		},
 		// uniapp兼容小程序和Vue的生命周期,使用哪种都可以,建议使用Vue的
@@ -70,7 +82,11 @@
 			// console.log(this.$store.state.home.initData)
 			// console.log(this.indexData)
 		},
-		methods:{},
+		methods:{
+			changeCurrentIndex(index){
+				this.currentIndex = index;
+			}
+		},
 		computed:{
 			// indexData(){
 			// 	return this.$store.state.home.indexData
