@@ -10387,8 +10387,10 @@ _mutationTypes.SETINDEXDATAMUTATION, function (state, indexData) {
 var actions = {
   getIndexData: function () {var _getIndexData = _asyncToGenerator( /*#__PURE__*/_regenerator.default.mark(function _callee(_ref) {var commit, result;return _regenerator.default.wrap(function _callee$(_context) {while (1) {switch (_context.prev = _context.next) {case 0:commit = _ref.commit;_context.next = 3;return (
                 (0, _axios.default)('/getIndexData'));case 3:result = _context.sent;
-              commit(_mutationTypes.SETINDEXDATAMUTATION, result);case 5:case "end":return _context.stop();}}}, _callee, this);}));function getIndexData(_x) {return _getIndexData.apply(this, arguments);}return getIndexData;}() };
-
+              commit(_mutationTypes.SETINDEXDATAMUTATION, result);
+              // console.log('context',context)
+              // context.state.indexData = result
+            case 5:case "end":return _context.stop();}}}, _callee, this);}));function getIndexData(_x) {return _getIndexData.apply(this, arguments);}return getIndexData;}() };
 
 
 

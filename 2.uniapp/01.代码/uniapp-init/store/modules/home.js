@@ -16,6 +16,8 @@ const actions = {
 	async getIndexData({commit}){
 		const result = await axios('/getIndexData');
 		commit(SETINDEXDATAMUTATION,result)
+		// console.log('context',context)
+		// context.state.indexData = result
 	}
 }
 

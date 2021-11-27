@@ -27,14 +27,39 @@
 				{{item.text}}
 			</view>
 		</scroll-view>
-		123
+		
+		<swiper class="bannerSwiper" :indicator-dots="true" :autoplay="true" :interval="3000" :duration="1000">
+			<swiper-item>
+				<view class="swiper-item">
+					<image class="bannerImg" src="/static/images/index/1.webp" mode=""></image>
+				</view>
+			</swiper-item>
+			<swiper-item>
+				<view class="swiper-item">
+					<image class="bannerImg"  src="/static/images/index/2.webp" mode=""></image>
+				</view>
+			</swiper-item>
+			<swiper-item>
+				<view class="swiper-item">
+					<image class="bannerImg"  src="/static/images/index/3.webp" mode=""></image>
+				</view>
+			</swiper-item>
+		</swiper>
+		
+		<Categorys 
+		v-for="(categoryObj,index) in indexData.categoryModule" 
+		:key="index"
+		:categoryObj="categoryObj"
+		></Categorys>
 	</view>
 </template>
 
 <script>
 	import {mapState} from 'vuex';
+	import Categorys from '../../components/categorys/categorys.vue';
 	import axios from '../../utils/axios.js';
 	export default {
+		components:{Categorys},
 		data() {
 			return {
 				// indexData:{}
@@ -130,4 +155,10 @@
 			line-height 80upx
 			&.active
 				border-bottom 4upx solid red
+	.bannerSwiper
+		.swiper-item
+			height 100%
+			.bannerImg
+				width 100%
+				height 100%
 </style>
