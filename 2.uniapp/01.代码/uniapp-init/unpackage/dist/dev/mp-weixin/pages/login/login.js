@@ -149,7 +149,7 @@ var _default =
       uni.getUserProfile({
         desc: "仅用于项目测试",
         success: function success(res) {
-          // console.log('res',res)
+          console.log('res', res);
           var userInfo = res.userInfo;
           uni.setStorage({
             key: "userInfo",

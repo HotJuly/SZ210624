@@ -3,6 +3,7 @@ import axios from '../../utils/axios';
 const state = {
 	cartList:[
     {
+		"selected":true,
 		"count":2,
         "promId": 0,
         "showPoints": false,
@@ -79,6 +80,7 @@ const state = {
         "itemSizeTableFlag": false
     },
     {
+		"selected":false,
 		"count":7,
         "promId": 0,
         "showPoints": false,
@@ -179,6 +181,43 @@ const mutations = {
 			state.cartList.push(good);
 			console.log('=1',good)
 		}
+	},
+	CHANGESHOPITEMCOUNTMUTATION(state,{type,index}){
+		// mutation只会接收两个参数,第一个参数是state对象,是固定的
+		// 第二个参数是调用mutation时,传入的实参
+		
+		/*
+			需求:当用户点击+/-号时,将对应商品数量进行修改
+				如果是+号,那么数量+1
+				如果是-号,那么数量-1
+					如果商品当前数量已经为1,在执行-号,应该删除该商品
+		*/
+		// console.log('CHANGESHOPITEMCOUNTMUTATION',type,index)
+		const cartList = state.cartList;
+		if(type){
+			// 能进入这个判断,说明用户点击+号
+			cartList[index].count+=1;
+		}else{
+			if(cartList[index].count===1){
+				// 如果数量为1,就需要把该商品踢出
+				cartList.splice(index,1);
+			}else{
+				cartList[index].count-=1;
+			}
+		}
+	},
+	CHANGESHOPITEMSELECTEDMUTATION(state,{selected,index}){
+		state.cartList[index].selected = selected;
+	},
+	CHANGEALLSELECTEDMUTATION(state,selected){
+		/*
+			将当前购物车中所有的商品状态都修改为selected状态
+		*/
+	   const result= state.cartList.forEach((shopItem)=>{
+		   shopItem.selected = selected
+		   // return 123;
+	   })
+	   // console.log('result',result)
 	}
 }
 
@@ -187,7 +226,23 @@ const actions = {
 }
 
 
-const getters = {}
+const getters = {
+	isSelectedAll(state){
+		/*
+			需求:
+				1.如果购物车中所有的商品都是选中状态,那么全选按钮应该是选中状态
+				2.如果购物车中有一个以上的商品是未选中状态,那么全选按钮应该是未选中状态
+				3.如果购物车中没有商品,那么全选按钮应该是未选中状态
+				4.返回值的数据类型:布尔值
+		*/
+	   if(!state.cartList.length)return false;
+	   
+	   const result = state.cartList.every((shopItem)=>{
+		   return shopItem.selected;
+	   })
+	   return result;
+	}
+}
 
 export default {
 	// namespaced: true,

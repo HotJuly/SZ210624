@@ -1510,6 +1510,7 @@ var _axios = _interopRequireDefault(__webpack_require__(/*! ../../utils/axios */
 var state = {
   cartList: [
   {
+    "selected": true,
     "count": 2,
     "promId": 0,
     "showPoints": false,
@@ -1586,6 +1587,7 @@ var state = {
     "itemSizeTableFlag": false },
 
   {
+    "selected": false,
     "count": 7,
     "promId": 0,
     "showPoints": false,
@@ -1686,6 +1688,43 @@ var mutations = {
       state.cartList.push(good);
       console.log('=1', good);
     }
+  },
+  CHANGESHOPITEMCOUNTMUTATION: function CHANGESHOPITEMCOUNTMUTATION(state, _ref) {var type = _ref.type,index = _ref.index;
+    // mutation只会接收两个参数,第一个参数是state对象,是固定的
+    // 第二个参数是调用mutation时,传入的实参
+
+    /*
+    	需求:当用户点击+/-号时,将对应商品数量进行修改
+    		如果是+号,那么数量+1
+    		如果是-号,那么数量-1
+    			如果商品当前数量已经为1,在执行-号,应该删除该商品
+    */
+    // console.log('CHANGESHOPITEMCOUNTMUTATION',type,index)
+    var cartList = state.cartList;
+    if (type) {
+      // 能进入这个判断,说明用户点击+号
+      cartList[index].count += 1;
+    } else {
+      if (cartList[index].count === 1) {
+        // 如果数量为1,就需要把该商品踢出
+        cartList.splice(index, 1);
+      } else {
+        cartList[index].count -= 1;
+      }
+    }
+  },
+  CHANGESHOPITEMSELECTEDMUTATION: function CHANGESHOPITEMSELECTEDMUTATION(state, _ref2) {var selected = _ref2.selected,index = _ref2.index;
+    state.cartList[index].selected = selected;
+  },
+  CHANGEALLSELECTEDMUTATION: function CHANGEALLSELECTEDMUTATION(state, selected) {
+    /*
+                                                                                  	将当前购物车中所有的商品状态都修改为selected状态
+                                                                                  */
+    var result = state.cartList.forEach(function (shopItem) {
+      shopItem.selected = selected;
+      // return 123;
+    });
+    // console.log('result',result)
   } };
 
 
@@ -1694,7 +1733,23 @@ var actions = {};
 
 
 
-var getters = {};var _default =
+var getters = {
+  isSelectedAll: function isSelectedAll(state) {
+    /*
+                                                	需求:
+                                                		1.如果购物车中所有的商品都是选中状态,那么全选按钮应该是选中状态
+                                                		2.如果购物车中有一个以上的商品是未选中状态,那么全选按钮应该是未选中状态
+                                                		3.如果购物车中没有商品,那么全选按钮应该是未选中状态
+                                                		4.返回值的数据类型:布尔值
+                                                */
+    if (!state.cartList.length) return false;
+
+    var result = state.cartList.every(function (shopItem) {
+      return shopItem.selected;
+    });
+    return result;
+  } };var _default =
+
 
 {
   // namespaced: true,
@@ -1859,6 +1914,9 @@ function _default(url) {var data = arguments.length > 1 && arguments[1] !== unde
       url: baseUrl + url,
       data: data,
       method: method,
+      header: {
+        token: uni.getStorageSync('token') },
+
       success: function success(res) {
         resolve(res.data);
       } });
