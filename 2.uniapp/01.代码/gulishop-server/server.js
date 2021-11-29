@@ -58,6 +58,24 @@ router.get('/getindexCateList',async function(ctx,next){
 	
 	ctx.body = indexCateList
 })
+
+
+
+// 用于返回商品详细数据的接口
+const goods = require('./datas/goods.json');
+router.get('/getGoodDetail',function(ctx,next){
+	console.log('/getGoodDetail success',ctx.query)
+	const {goodId} = ctx.query;
+	
+	// find的使用方法
+	// 如果找到商品，返回该商品对象
+	// 如果没有找到，返回undefined
+	const result = goods.find((good)=>{
+		return good.id === goodId >>> 0
+	})
+	
+	ctx.body = result
+})
 	
 
 // 2.将服务器应用实例运行到某个指定端口,并监听该端口

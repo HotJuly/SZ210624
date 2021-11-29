@@ -11,12 +11,12 @@
       -ms-flex-pack: distribute;
           justify-content: space-around;
 }
-.recommendContainer .policyDescList .policyDescItem image {
+.recommendContainer .policyDescList .policyDescItem .policyDescIcon {
   width: 32rpx;
   height: 32rpx;
   vertical-align: middle;
 }
-.recommendContainer .policyDescList .policyDescItem text {
+.recommendContainer .policyDescList .policyDescItem .policyDescText {
   font-size: 24rpx;
   vertical-align: middle;
 }
@@ -33,11 +33,11 @@
   width: 20%;
   text-align: center;
 }
-.recommendContainer .nav .navItem image {
+.recommendContainer .nav .navItem .kingKongImg {
   width: 110rpx;
   height: 110rpx;
 }
-.recommendContainer .nav .navItem view {
+.recommendContainer .nav .navItem .kingKongText {
   font-size: 24rpx;
 }
 

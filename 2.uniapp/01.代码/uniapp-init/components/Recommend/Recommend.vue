@@ -19,8 +19,8 @@
 			v-for="policyDesc in indexData.policyDescList"
 			:key="policyDesc.desc"
 			>
-				<image :src="policyDesc.icon" mode=""></image>
-				<text>{{policyDesc.desc}}</text>
+				<image class="policyDescIcon" :src="policyDesc.icon" mode=""></image>
+				<text class="policyDescText">{{policyDesc.desc}}</text>
 			</view>
 		</view>
 		
@@ -31,8 +31,8 @@
 			v-for="kingKong in indexData.kingKongModule.kingKongList"
 			:key="kingKong.L1Id"
 			>
-				<image :src="kingKong.picUrl" mode=""></image>
-				<view>{{kingKong.text}}</view>
+				<image class="kingKongImg" :src="kingKong.picUrl" mode=""></image>
+				<view class="kingKongText">{{kingKong.text}}</view>
 			</view>
 		</view>
 		
@@ -62,6 +62,7 @@
 </script>
 
 <style lang="stylus">
+	
 	.recommendContainer
 		.bannerSwiper
 			.bannerImg
@@ -71,11 +72,11 @@
 			display flex
 			justify-content space-around
 			.policyDescItem
-				image
+				.policyDescIcon
 					width 32upx
 					height 32upx
 					vertical-align middle
-				text
+				.policyDescText
 					font-size 24upx
 					vertical-align middle
 		.nav
@@ -84,9 +85,9 @@
 			.navItem
 				width 20%
 				text-align center
-				image
+				.kingKongImg
 					width 110upx
 					height 110upx
-				view
+				.kingKongText
 					font-size 24upx
 </style>
