@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+//    组合继承
+//   需求1: 
+//     现在1个人, 有姓名与年龄(值自己指定), 能自我介绍自己的姓名和年龄, 能得到当前的总人数
+// 需求2: 
+//     现在有了一个学生, 它有身价的属性, 能介绍它的所有信息
+
+        function Person(name,age){
+            this.name = name +1 ;
+            this.age = age ;
+            // this.sayHello=function(){
+            //     console.log(`我叫${this.name},我今年${this.age}岁`)
+            // }
+            Person.count+=1;
+        }
+
+        Person.count=0;
+        // Array.from()
+
+        Person.prototype.sayHello=function(){
+            console.log(`我叫${this.name},我今年${this.age}岁`)
+        }
+
+        var p1 = new Person("xiaoming",23);
+
+        p1.sayHello();
+        console.log(Person.count)
+
+        function Student(name,age,price){
+            // this.name = name ;
+            // this.age = age ;
+            // 1.通过借调父类的形式,从而获取到父类的所有属性的加工
+            Person.call(this,name,age);
+            this.price = price ;
+        }
+
+        // 2.将父类的实例对象作为子类的原型对象使用
+        // 用于获取父类中所有的方法
+        Student.prototype = new Person()
+        Student.prototype.constructor=Student;
+        // Student.prototype = Person.prototype
+        
+        var s1= new Student("xiaowang",26,8000000000);
+
+        s1.sayHello();
+    </script>
+</body>
+</html>
