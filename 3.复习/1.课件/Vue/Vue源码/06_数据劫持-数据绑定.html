@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>06_数据劫持-数据绑定</title>
+    <!--
+    1. 数据绑定
+      * 初始化显示: 页面(表达式/指令)能从data读取数据显示 (编译/解析)
+      * 更新显示: 更新data中的属性数据==>页面更新
+  -->
+  <!-- 
+    研究问题:
+      1.如何实现data数据在页面上的展示
+      2.如何实现响应式效果
+   -->
+</head>
+  <body>
+    <div id="app" class="A">
+      <p>{{msg}}</p>
+      <p>{{person.name}}</p>
+    </div>
+    <script src="./js/observer.js"></script>
+    <script src="./js/watcher.js"></script>
+    <script src="./js/compile.js"></script>
+    <script src="./js/mvvm.js"></script>
+    <script>
+      var vm = new MVVM({
+        el: "#app",
+        data: {
+          msg: "hello mvvm",
+          person:{
+            name:"xiaoming",
+            msg:"123"
+          },
+        }
+      });
+
+      vm.msg="atguigu";
+      // vm.person={
+      //   name:123
+      // }
+      // vm.person ={};
+      // vm.person.name=123;
+
+    </script>
+  </body>
+</html>
