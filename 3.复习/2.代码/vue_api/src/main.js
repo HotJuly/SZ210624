@@ -41,10 +41,25 @@ Vue.config.productionTip = false
 //   }
 // })
 
+
+/*
+  控制Vue页面显示内容的方式:
+    1.给根组件的配置对象添加template属性(想使用该属性必须开启完整版Vue)
+    2.给根组件的配置对象添加render方法
+    3.给模版元素内部写入Vue的template代码(它可以被Vue识别)
+
+    优先级:render>template>index.html模版
+
+*/
 new Vue({
+  el:"#app",
+  template:"<div><span>{{ msg }}</span></div>",
+  data: {
+    msg: 'hello'
+  },
   name:"Root",
-  render: h => h(App),
-}).$mount('#app')
+  render: createElement => createElement(App),
+})
 
 // var res = Vue.compile('<div><span>{{ msg }}</span></div>')
 

@@ -1,10 +1,10 @@
 <template>
   <div id="app">
-    <HelloWorld :name="user.name"/>
+    <HelloWorld />
     <button @click="changeEdit" v-if="!isEdit">添加</button>
     <input ref="inputref" v-else type="text">
 
-    <!-- <h1>{{user.name  | myFilter1}}</h1> -->
+    <!-- <h1>{{user.name  | myFilter1}}</h1>
     <h1>{{changeName}}</h1>
     <h1>{{changeName}}</h1>
     <h1>{{changeName}}</h1>
@@ -12,11 +12,12 @@
     <h1>{{changeName}}</h1>
     <h1>{{changeName}}</h1>
     <h1>{{changeName}}</h1>
-    <h1>{{changeName}}</h1>
+    <h1>{{changeName}}</h1> -->
   </div>
 </template>
 
 <script>
+import Vue from 'vue'
 import HelloWorld from './components/HelloWorld.vue'
 
 export default {
@@ -52,19 +53,28 @@ export default {
       //   console.log('nextTick2')
       // })
 
-      this.$delete( this.user, "name" );
-      // delete this.user.name
-      console.log(this.user)
+      // this.$delete( this.user, "name" );
+      // // delete this.user.name
+      // console.log(this.user)
+      // console.log(this)
+      this._provided.data.user.name="xiaoming1"
     }
+  },
+  provide:{
+    data:Vue.observable({
+      user:{
+        name:"xiaoming"
+      }
+    })
   },
   data(){
     return {
       isEdit:false,
-      user:{
-        name:"xiaoming",
-        age:28,
-        time:100000000
-      },
+      // user:{
+      //   name:"xiaoming",
+      //   age:28,
+      //   time:100000000
+      // },
       // time:Date.now()
     }
   },
