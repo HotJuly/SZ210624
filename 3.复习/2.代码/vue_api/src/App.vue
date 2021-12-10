@@ -1,8 +1,18 @@
 <template>
   <div id="app">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <HelloWorld :name="user.name"/>
     <button @click="changeEdit" v-if="!isEdit">添加</button>
     <input ref="inputref" v-else type="text">
+
+    <!-- <h1>{{user.name  | myFilter1}}</h1> -->
+    <h1>{{changeName}}</h1>
+    <h1>{{changeName}}</h1>
+    <h1>{{changeName}}</h1>
+    <h1>{{changeName}}</h1>
+    <h1>{{changeName}}</h1>
+    <h1>{{changeName}}</h1>
+    <h1>{{changeName}}</h1>
+    <h1>{{changeName}}</h1>
   </div>
 </template>
 
@@ -22,30 +32,52 @@ export default {
           视图更新,是异步更新(有延迟)
 
       */
-      this.$nextTick(()=>{
-        this.$refs.inputref.focus();
-        // console.log('nextTick1')
-      })
-      this.isEdit=true;
-      // console.log(this.isEdit)
-      // debugger
+      // this.$nextTick(()=>{
+      //   this.$refs.inputref.focus();
+      //   // console.log('nextTick1')
+      // })
+      // this.isEdit=true;
+      // // console.log(this.isEdit)
+      // // debugger
 
-      // 有个无形的nextTick
+      // // 有个无形的nextTick
 
-      Promise.resolve().then(()=>{
-        console.log('then1')
-      })
-      Promise.resolve().then(()=>{
-        console.log('then2')
-      })
-      this.$nextTick(()=>{
-        console.log('nextTick2')
-      })
+      // Promise.resolve().then(()=>{
+      //   console.log('then1')
+      // })
+      // Promise.resolve().then(()=>{
+      //   console.log('then2')
+      // })
+      // this.$nextTick(()=>{
+      //   console.log('nextTick2')
+      // })
+
+      this.$delete( this.user, "name" );
+      // delete this.user.name
+      console.log(this.user)
     }
   },
   data(){
     return {
-      isEdit:false
+      isEdit:false,
+      user:{
+        name:"xiaoming",
+        age:28,
+        time:100000000
+      },
+      // time:Date.now()
+    }
+  },
+  filters:{
+    myFilter1(value){
+      // console.log(value)
+      return value+1
+    }
+  },
+  computed:{
+    changeName(){
+      console.log('changeName')
+      return this.user.name+"2"
     }
   },
   a:124,
@@ -74,6 +106,8 @@ export default {
   //  this.$nextTick(()=>{
   //    console.log('nextTick2')
   //  })
+
+    // console.log(this.$options.name)
   }
 }
 </script>

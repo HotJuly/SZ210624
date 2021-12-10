@@ -30,6 +30,28 @@ Vue.config.productionTip = false
 //   console.log(a,b,c)
 // }
 
+// Vue.filter('myFilter',function(value){
+//     console.log(value)
+//     return value+"1"
+// })
+
+// Vue.mixin({
+//   mounted(){
+//     console.log(this.$options.name)
+//   }
+// })
+
 new Vue({
+  name:"Root",
   render: h => h(App),
 }).$mount('#app')
+
+// var res = Vue.compile('<div><span>{{ msg }}</span></div>')
+
+// new Vue({
+//   el:"#app",
+//   data: {
+//     msg: 'hello'
+//   },
+//   render: res.render,
+// })
