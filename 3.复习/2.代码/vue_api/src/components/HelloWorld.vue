@@ -1,24 +1,28 @@
 <template>
   <div>
     Hello
-    <!-- <el-button>123</el-button> -->
-    <h2>{{data.user.name}}</h2>
+    <h2>{{msg123}}</h2>
+    <input type="text" @input="changeMsg">
   </div>
 </template>
 
 <script>
-import hooks from '/src/mixins';
 export default {
   name: "HelloWorld",
-  a:667,
-  mounted(){
-    // console.log(c)
+  props:["msg123"],
+  model: {
+    prop: 'msg123',
+    event: 'input666'
   },
-  inject:["data"],
-  mixins:[hooks],
-  created() {
-    console.log('2',this.c,this.data.user.name)
+  methods: {
+    changeMsg(event){
+      // console.log(event.target.value)
+      this.$emit('input666',event.target.value)
+    }
   },
+  // mounted(){
+  //   console.log('parent',this.$parent.phone)
+  // }
 };
 </script>
 

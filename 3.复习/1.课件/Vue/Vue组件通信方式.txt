@@ -25,3 +25,39 @@
 			2.默认情况下provide和inject的数据不是响应式数据
 				如果需要变成响应式,可以配合Vue.observable实现
 
+3.自定义事件
+	v-model(双向数据绑定)
+		1.将v-model用在input框上
+			-将data中的数据作为input的默认值显示在input框中
+    				<input type="text" :value="msg">
+
+			-当用户修改input框的内容时,会同步修改data中对应的属性
+    				<input type="text" :value="msg" @input="event=>msg=event.target.value">
+
+		2.将v-model用在组件身上
+			-将data中的数据作为组件的标签属性进行传递(属性名称默认为value)
+    				<A  :value="msg">
+
+			-父组件会给子组件绑定自定义事件,方便子组件后续修改父组件状态(事件名称默认为input)
+    				<HelloWorld :value="msg" @input="data=>msg=data" />
+
+			注意:默认属性名和事件名都可以通过model配置进行修改
+
+4.找到对应组件的实例对象
+	$parent->可以找到父组件的实例对象(vm),他能使用的数据都能给你
+	$root->可以找到根组件的实例对象(vm)
+	$children->可以找到子组件实例组成的数组
+		1.该数组中实例对象的排列顺序不代表页面的组件显示顺序
+		2.操作该数组的排列顺序不会影响到页面上的显示顺序
+	$refs
+		1.给原生html标签添加ref属性
+			可以获取到对应标签的真实DOM
+		2.给组件标签添加ref属性
+			可以获取到对应组件的组件实例对象
+
+5.$attrs,$listeners
+	$attrs
+		他就像是垃圾桶,专门收集props没有接收的标签属性数据
+	
+		
+			
