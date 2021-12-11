@@ -52,14 +52,13 @@ Vue.config.productionTip = false
 
 */
 new Vue({
-  el:"#app",
   template:"<div><span>{{ msg }}</span></div>",
   data: {
     msg: 'hello'
   },
   name:"Root",
   render: createElement => createElement(App),
-})
+}).$mount('#app')
 
 // var res = Vue.compile('<div><span>{{ msg }}</span></div>')
 
