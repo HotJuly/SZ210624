@@ -1,4 +1,9 @@
 function Watcher(vm, exp, cb) {
+    /*
+        this->watcher实例对象
+        exp->"msg"
+        cb->如果该函数被调用,就会更新对应的节点
+    */
     this.cb = cb;
     this.vm = vm;
     this.exp = exp;
@@ -11,7 +16,10 @@ Watcher.prototype = {
         this.run();
     },
     run: function() {
+        // 获取到当前的最新值
         var value = this.get();
+
+        // 获取到上次的旧值
         var oldVal = this.value;
         if (value !== oldVal) {
             this.value = value;
@@ -33,23 +41,36 @@ Watcher.prototype = {
         // 这一步是在 this.get() --> this.getVMVal() 里面完成，forEach时会从父级开始取值，间接调用了它的getter
         // 触发了addDep(), 在整个forEach过程，当前wacher都会加入到每个父级过程属性的dep
         // 例如：当前watcher的是'child.child.name', 那么child, child.child, child.child.name这三个属性的dep都会加入当前watcher
+        
         if (!this.depIds.hasOwnProperty(dep.id)) {
-            dep.addSub(this);
+            // watcher已经收集到与他相关的dep对象
+            // 插值语法已经收集到与他相关的响应式属性
             this.depIds[dep.id] = dep;
+
+
+            dep.addSub(this);
+            // dep.addSub(watcher);
         }
     },
     get: function() {
         Dep.target = this;
+        // Dep.target = watcher;
+
         var value = this.getVMVal();
         Dep.target = null;
         return value;
     },
 
     getVMVal: function() {
+        // exp=>["msg"]
         var exp = this.exp.split('.');
+
+        // val->this._data
         var val = this.vm._data;
+
         exp.forEach(function(k) {
             val = val[k];
+            // val = this._data["msg"];
         });
         return val;
     }

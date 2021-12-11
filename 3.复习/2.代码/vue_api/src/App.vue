@@ -63,7 +63,8 @@ export default {
       // console.log(123)
       // this.user.name=222222;
       // console.log(123)
-
+  // var arr= [];
+  // arr.push();
       // this.flag=!this.flag
       this.showComponent= B;
     }

@@ -17,6 +17,8 @@
   <body>
     <div id="app" class="A">
       <p v-on:click="handleClick">{{msg}}</p>
+      <p>{{msg}}</p>
+      <p>{{msg}}</p>
     </div>
     <script src="./js/observer.js"></script>
     <script src="./js/watcher.js"></script>
@@ -34,6 +36,7 @@
         }
       });
 
+      vm.msg="hello world"
 
     </script>
   </body>

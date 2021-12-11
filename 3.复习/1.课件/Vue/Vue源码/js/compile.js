@@ -165,6 +165,10 @@ var compileUtil = {
         new Watcher(vm, exp, function(value, oldValue) {
             updaterFn && updaterFn(node, value, oldValue);
         });
+        
+        // new Watcher(vm, "msg", function(value, oldValue) {
+        //     updaterFn && updaterFn(text节点, value, oldValue);
+        // });
     },
 
     // 事件处理

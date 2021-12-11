@@ -118,10 +118,15 @@ function Dep() {
 Dep.prototype = {
     addSub: function(sub) {
         this.subs.push(sub);
+
+        // dep对象收集到与他相关的所有watcher对象
+        // 响应式属性收集到与他相关的所有插值语法
+        // dep.subs.push(watcher);
     },
 
     depend: function() {
         Dep.target.addDep(this);
+        // watcher.addDep(dep);
     },
 
     removeSub: function(sub) {
@@ -134,6 +139,7 @@ Dep.prototype = {
     notify: function() {
         this.subs.forEach(function(sub) {
             sub.update();
+            // watcher.update();
         });
     }
 };
