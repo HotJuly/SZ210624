@@ -83,6 +83,7 @@
 	$refs
 		1.给原生html标签添加ref属性
 			可以获取到对应标签的真实DOM
+
 		2.给组件标签添加ref属性
 			可以获取到对应组件的组件实例对象
 
@@ -91,6 +92,37 @@
 		他就像是垃圾桶,专门收集props没有接收的标签属性数据
 	$listeners
 		他用于收集当前组件绑定的所有自定义事件
+
+6.插槽
+	插槽主要的用处就是向某个组件内部传入一段代码结构(template)
+
+	默认插槽
+		1.父组件在子组件的标签中,写入需要在子组件展示的template代码
+		2.子组件在自己的template中,书写slot组件,用于占位并声明插槽显示位置(最终父组件传下来的结构会替换掉slot组件)
+
+	具名插槽
+		具名插槽就是在默认插槽的情况下,给父组件传递下来的插槽进行取名
+      			<template v-slot:header>
+        				<h1>我是具名插槽header</h1>
+      			</template>
+
+			<slot name="header"></slot>
+
+		注意:其实默认插槽的名字就是default
+
+	作用域插槽
+		父组件向子组件传递template结构,但是该结构中需要用到子组件的数据,所以需要使用作用域插槽
+			父组件:
+      			<template v-slot:footer="{title}">
+      			<template #footer="{title}">
+        				<h1>我是作用域插槽footer,{{title}}</h1>
+      			</template>
+	
+			子组件:
+    			<slot name="footer" title="I'm Footer"></slot>
+
+7.Vuex
+		
 	
 		
 			
