@@ -1,5 +1,5 @@
 <template>
-  <div id="app">
+  <div id="app" class="B">
     <!-- <HelloWorld :value="msg" @input="data=>msg=data" /> -->
     <!-- <HelloWorld ref="hello" :msg.sync="msg" /> -->
     <!-- <HelloWorld ref="hello" :msg="msg" @update:msg="data=>msg=data" /> -->

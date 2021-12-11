@@ -1,20 +1,29 @@
 function Compile(el, vm) {
+    // el->"#app",vm
+    // this->解析器对象com
     this.$vm = vm;
     this.$el = this.isElementNode(el) ? el : document.querySelector(el);
 
     if (this.$el) {
+        // 将app元素中所有的直系子节点已转移到文档碎片中
         this.$fragment = this.node2Fragment(this.$el);
+
+        // 开始编译模版,实现插值语法转换
         this.init();
+
+        // 这一步就是所谓的挂载,将编译完的内容插入到页面的html中
         this.$el.appendChild(this.$fragment);
     }
 }
 
 Compile.prototype = {
     node2Fragment: function(el) {
+        // el->app元素
         var fragment = document.createDocumentFragment(),
             child;
 
         // 将原生节点拷贝到fragment
+        // 相当于app元素被抄家了
         while (child = el.firstChild) {
             fragment.appendChild(child);
         }
@@ -27,6 +36,9 @@ Compile.prototype = {
     },
 
     compileElement: function(el) {
+        // el->fragment
+        // el->p元素
+        // 获取到文档碎片中所有子节点组成的伪数组
         var childNodes = el.childNodes,
             me = this;
 
@@ -45,6 +57,23 @@ Compile.prototype = {
                 me.compileElement(node);
             }
         });
+        // [text节点,p节点,text节点].forEach(function(node) {
+            // text->"{{msg}}"
+        //     var text = node.textContent;
+        //     var reg = /\{\{(.*)\}\}/;
+
+        //     if (com.isElementNode(node)) {
+            // 此处是准备解析指令
+        //         me.compile(node);
+
+        //     } else if (me.isTextNode(node) && reg.test(text)) {
+        //         com.compileText(text节点, "msg");
+        //     }
+
+        //     if (node.childNodes && node.childNodes.length) {
+        //         me.compileElement(node);
+        //     }
+        // });
     },
 
     compile: function(node) {
@@ -70,7 +99,9 @@ Compile.prototype = {
     },
 
     compileText: function(node, exp) {
+        // text节点, "msg"
         compileUtil.text(node, this.$vm, exp);
+        // compileUtil.text(text节点, vm, "msg");
     },
 
     isDirective: function(attr) {
@@ -93,7 +124,10 @@ Compile.prototype = {
 // 指令处理集合
 var compileUtil = {
     text: function(node, vm, exp) {
+        // text节点, vm, "msg"
+        // 总结:每存在一个插值语法就会执行一次bind函数
         this.bind(node, vm, exp, 'text');
+        // this.bind(text节点, vm, "msg", 'text');
     },
 
     html: function(node, vm, exp) {
@@ -121,9 +155,12 @@ var compileUtil = {
     },
 
     bind: function(node, vm, exp, dir) {
+        // text节点, vm, "msg", 'text'
         var updaterFn = updater[dir + 'Updater'];
+        // var updaterFn = updater['textUpdater'];
 
         updaterFn && updaterFn(node, this._getVMVal(vm, exp));
+        // updaterFn && updaterFn(text节点, "hello mvvm");
 
         new Watcher(vm, exp, function(value, oldValue) {
             updaterFn && updaterFn(node, value, oldValue);
@@ -136,15 +173,23 @@ var compileUtil = {
             fn = vm.$options.methods && vm.$options.methods[exp];
 
         if (eventType && fn) {
+            // Vue1的事件回调函数是在绑定的时候才改变this指向
+            // Vue2中,在初始化组件的时候,methods中所有的方法都会被强行改变this指向
             node.addEventListener(eventType, fn.bind(vm), false);
         }
     },
 
     _getVMVal: function(vm, exp) {
+        // vm, "msg"
+        // vm, "person.name"
         var val = vm._data;
+
+        // exp->["person","name"]
         exp = exp.split('.');
         exp.forEach(function(k) {
             val = val[k];
+            // val = vm._data["person"];
+            // val = person["name"];
         });
         return val;
     },
@@ -166,6 +211,7 @@ var compileUtil = {
 
 var updater = {
     textUpdater: function(node, value) {
+        // 此处就是将插值语法更新为data中的数据
         node.textContent = typeof value == 'undefined' ? '' : value;
     },
 

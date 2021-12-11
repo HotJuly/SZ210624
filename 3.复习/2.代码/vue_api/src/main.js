@@ -52,7 +52,7 @@ Vue.config.productionTip = false
 
 */
 new Vue({
-  template:"<div><span>{{ msg }}</span></div>",
+  // template:"<div><span>{{ msg }}</span></div>",
   data: {
     msg: 'hello'
   },
