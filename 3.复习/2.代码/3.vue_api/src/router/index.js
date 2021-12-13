@@ -1,5 +1,6 @@
 import Vue from 'vue';
-import VueRouter from 'vue-router';
+import VueRouter from '../my-router';
+// import VueRouter from 'vue-router';
 
 import Home from '../components/A.vue';
 import About from '../components/B.vue';
@@ -18,11 +19,11 @@ export default new VueRouter({
     mode:"history",
     routes:[
         {
-            path:"/Home",
+            path:"/home",
             component:Home
         },
         {
-            path:"/About",
+            path:"/about",
             component:About
         }
     ]
