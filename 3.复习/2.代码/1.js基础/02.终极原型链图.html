@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        /*
+            1.万物皆对象
+            2.所有的对象都是Object的实例对象
+            3.所有的函数都是Function的实例对象(包括他自己???)
+            4.函数在js中是一等公民,它既是函数又是对象
+                Function.prototype
+                Function.__proto__
+        
+            语法糖:
+                {} ===> new Object
+                [] ===> new Array
+                function a(){} ===> new Function()
+
+                async await
+        */
+        function Foo () {}
+        const f1 = new Foo()
+        const f2 = new Foo()
+
+        const o1 = new Object()
+        const o2 = {}
+
+        // Foo instanceof Object  true
+        // Foo instanceof Function  true
+        // Object instanceof Object  true
+        // Function instanceof Function true
+        // Function instanceof Object  true
+
+        // Object instanceof Foo    false
+        // f1 instanceof Function   false
+        // f1 instanceof Object     true
+
+
+        /*
+            javascript是基于C语言实现的
+            其中通过C语言创建的内容,有三个:
+                1.Object
+                2.Function
+                3.Function.prototype
+        
+            在终极原型链图中,具有问题的线:
+                1.Function.prototype === Function.__proto__
+                    Function.prototype身上具有所有函数公共的方法
+                    但是Function自己也是一个函数呀
+
+                2.Function.prototype === Object.__proto__
+                    同上,如果没有这条线,那么Object.call()将会报错
+
+                3.Function.prototype.__proto__ === Object.prototype
+                    因为函数既是函数,又是对象
+                    如果没有这条线,他就只是函数,将无法使用所有对象公共的方法
+                    
+                4.Object.prototype.__proto__ === null
+                    由于Object的原型对象是Object创建的,如果原型对象查找方法,自身没有,会在找到Object的原型对象(也就是自己)
+                    会进入死循环,所以必须具有一个顶点
+        */
+
+        // Foo.call(1,2,3)
+        console.log('1',Object)
+        console.log('2',Function)
+        console.log('3',Function.prototype)
+        console.log('4',Object.prototype)
+    </script>
+
+</body>
+</html>

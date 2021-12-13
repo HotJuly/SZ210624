@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // 面试题:现在需要提供一个函数,该函数可以返回传入数据的数据类型
+        var arr = [];
+        var data = new Date();
+        function getType(data){
+            // if(data instanceof Array){
+            //     return "array"
+            // }
+            return Object.prototype.toString.call(data).substring(8).replace("]","")
+            // return {}.toString.call(data).substring(8).replace("]","")
+        }
+        console.log(getType(arr))
+        console.log(getType(data))
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <ul>
+      <li>aaa</li>
+      <li>bbb</li>
+      <li>ccc</li>
+  </ul>
+  <button id="test">test</button>
+  <div id="content">
+      aaaaaaa
+  </div>
+  <script>
+      /*
+        mounted -> 挂载结束 不代表渲染结束
+            挂载->将DOM节点添加到html中
+            渲染->将html中的内容绘制到浏览器中
+      
+        js解析线程与GUI线程是互斥的,不会同时执行
+        GUI线程渲染页面的时间点,在微任务之后宏任务之前
+
+        说法:
+            如果不将主线程代码视为第一宏任务,那么就是微任务优先
+            如果将主线程代码视为第一宏任务,那么就是宏任务优先
+
+        首次渲染流程:
+            主线程代码->清空微任务队列->GUI线程渲染->宏任务执行
+                注意:每次执行完一个宏任务,都需要清空微任务队列
+
+        更新渲染流程:
+            更新DOM之后->清空微任务队列->GUI线程渲染->宏任务执行
+            浏览器渲染页面会进行防抖操作
+      
+      */
+      Promise.resolve().then(() => { // 微任务
+          alert('promise1') // 页面渲染了吗?
+      }) 
+      Promise.resolve().then(() => { // 微任务
+          alert('promise2') // 页面渲染了吗?
+      }) 
+      setTimeout(() => {// 宏任务
+          alert(document.getElementById('content').innerHTML)  // 页面渲染了吗?
+      }, 0)
+      document.getElementById('test').onclick = () => {// 宏任务
+          document.getElementById('content').innerHTML = 'xxxx'  // dom渲染 
+          document.getElementById('content').innerHTML = 'xxxx1'  // dom渲染 
+          document.getElementById('content').innerHTML = 'xxxx2'  // dom渲染 
+          document.getElementById('content').innerHTML = 'xxxx'  // dom渲染 
+          document.getElementById('content').innerHTML = 'xxxx'  // dom渲染 
+          document.getElementById('content').innerHTML = 'xxxx'  // dom渲染 
+          document.getElementById('content').innerHTML = 'xxxx'  // dom渲染 
+          document.getElementById('content').innerHTML = 'xxxx3'  // dom渲染 
+
+        //   浏览器渲染页面会进行防抖操作
+
+          setTimeout(() => {// 宏任务  
+              alert(document.getElementById('content').innerHTML) // 页面更新渲染了吗?
+          }, 0); 
+          Promise.resolve().then(() => { // 微任务 
+              alert('promise3') //页面更新渲染了吗?
+          }) 
+      }
+      alert('1111') // 页面渲染了吗?
+
+  </script>
+</body>
+</html>
