@@ -49,12 +49,6 @@ export default {
       showComponent:A
     }
   },
-  mounted(){
-    // console.log('children',this.$children)
-    // this.$children[0]
-
-    console.log('hello',this.$refs.hello)
-  },
   methods:{
     handleClick(){
       // this.user.name=123;
@@ -68,7 +62,23 @@ export default {
       // this.flag=!this.flag
       this.showComponent= B;
     }
-  }
+  },
+  beforeCreate(){
+    // console.log('beforeCreate',this,this.$data,this.msg,this.$el)
+    console.log('beforeCreate',this.$vnode,this._vnode)
+  },
+  created(){
+    // console.log('created',this,this.$data,this.msg,this.$el)
+    console.log('created',this.$vnode,this._vnode)
+  },
+  beforeMount(){
+    // console.log('beforeMount',this,this.$data,this.msg,this.$el)
+    console.log('beforeMount',this.$vnode,this._vnode)
+  },
+  mounted(){
+    // console.log('mounted',this,this.$data,this.msg,this.$el)
+    console.log('mounted',this.$vnode,this._vnode)
+  },
 }
 </script>
 

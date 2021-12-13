@@ -8,11 +8,15 @@ function Compile(el, vm) {
         // 将app元素中所有的直系子节点已转移到文档碎片中
         this.$fragment = this.node2Fragment(this.$el);
 
+        // 此处是beforeMount的执行时机!!!!!!
+
         // 开始编译模版,实现插值语法转换
         this.init();
 
         // 这一步就是所谓的挂载,将编译完的内容插入到页面的html中
         this.$el.appendChild(this.$fragment);
+
+        // 此处是mounted的执行时机!!!!!!
     }
 }
 

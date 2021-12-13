@@ -1,0 +1,64 @@
+# Vue生命周期
+
+1. Vue一共有多少个生命周期?
+   1. 一共具有11个,常用8个
+2. Vue生命周期做什么事?
+   1. 初始化阶段
+      1. beforeCreate
+         1. **beforeCreate之前在初始化事件和初始化生命周期**
+      2. created
+         1. 发送请求
+            1. 背景:js解析是单线程解析的
+            2. 好处:此处发送请求,响应会更早返回
+            3. 坏处:阻塞后续代码执行
+               1. 会延迟页面渲染的时间
+         2. 注意:禁止在created中书写大量逻辑相关代码
+         3. **beforeCreate之后created之前,在做数据代理和数据劫持,同时将methods,computed中的属性,在实例对象上添加一份**
+      3. beforeMount
+         1. **created之后beforeMount之前,**
+            1. **检查是否具有el属性,如果没有就等待$mount的调用**
+            2. **检查是否具有template属性,如果有就编译template变成render,如果没有就是用index.html中的代码作为模版**
+               1. **如果已经具有render就会无视template和index.html**
+            3. **优先级:render>template>index.html模版**
+            4. **总结:此处只会做好准备工作,一定会有render函数,但是不会执行**
+      4. mounted
+         1. 发送请求
+            1. 好处:不会阻塞页面渲染
+            2. 坏处:速度相对较慢
+         2. 开启定时器
+         3. 绑定自定义事件
+         4. 操作真实DOM
+            1. new Swiper
+            2. 创建滑动效果
+            3. 让input获取焦点
+         5. **beforeMount之后mounted之前,Vue会执行render函数用于创建虚拟DOM,同时通过虚拟DOM创建真实DOM,并替换掉页面上的el元素,实现渲染**
+         6. **注意:$vnode中存放的是父组件的虚拟DOM,_vnode存放的是当前组件的虚拟DOM**
+   2. 更新阶段 
+      1. beforeUpdate
+      2. updated
+         1. 能触发该生命周期,说明某个响应式属性发生了变化
+         2. 由于响应式数据发生变化,页面结构可能发生变化
+         3. 此处一般会二次操作真实DOM,例如刷新Swiper等效果
+   3. 卸载阶段
+      1. beforeDestory
+         1. 关闭定时器
+         2. 解绑事件
+            1. 给当前组件绑定的自定义事件
+               1. 不需要
+            2. 使用@语法给template绑定的原生事件
+               1. 不需要
+            3. 通过addEventListener或者onclick类似于绑定的原生事件
+               1. 需要
+            4. 当前组件给全局事件总线绑定的自定义事件
+               1. 需要(为了防止内存溢出)
+      2. destoryed
+   4. keep-alive专用
+      1. activated(激活)
+         1. 他是初始化阶段的替代品
+      2. deactivated(失活)
+         1. 他是卸载阶段的替代品
+   5. 捕获报错(错误边界)
+      1. errorCaptured
+         1. 只能捕获到后代组件出现的错误
+      2. Vue.config.errorHandler
+         1. 可以捕获项目中出现的报错

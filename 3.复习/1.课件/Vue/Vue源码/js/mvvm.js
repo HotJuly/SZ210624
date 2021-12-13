@@ -16,6 +16,7 @@ function MVVM(options) {
     }
   */
 
+    // 此处是beforeCreate的执行时机!!!!!
    //把配置对象保存给vm一份
     this.$options = options;
     //把配置对象的data保存到vm的_data 地址一样
@@ -111,6 +112,7 @@ function MVVM(options) {
 
     observe(data, this);
     
+    // 此处是created的执行时机!!!!!
     // observe(data, vm);
 
     /*

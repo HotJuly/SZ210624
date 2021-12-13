@@ -52,6 +52,7 @@ Vue.config.productionTip = false
 
 */
 new Vue({
+  el:"#app",
   // template:"<div><span>{{ msg }}</span></div>",
   data: {
     msg: 'hello'
