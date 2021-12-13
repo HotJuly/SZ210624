@@ -1,6 +1,6 @@
 import Vue from 'vue';
-import VueRouter from '../my-router';
-// import VueRouter from 'vue-router';
+// import VueRouter from '../my-router';
+import VueRouter from 'vue-router';
 
 import Home from '../components/A.vue';
 import About from '../components/B.vue';
@@ -15,16 +15,27 @@ Vue.use(VueRouter);
 
             router.get('/getIndex',()=>{})
 */
-export default new VueRouter({
+
+const router = new VueRouter({
     mode:"history",
     routes:[
         {
             path:"/home",
-            component:Home
+            component:Home,
+            beforeEnter(to,from,next){
+                console.log('beforeEnter',to,from);
+                next();
+            }
         },
         {
             path:"/about",
             component:About
         }
     ]
+});
+
+router.beforeEach((to,from,next)=>{
+    console.log('beforeEach',to,from);
+    next();
 })
+export default router;

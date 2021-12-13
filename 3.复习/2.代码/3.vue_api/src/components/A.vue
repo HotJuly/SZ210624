@@ -1,12 +1,16 @@
 <template>
   <div>
-    A
+    Home
   </div>
 </template>
 
 <script>
 export default {
   name: "A",
+  beforeRouteEnter(to,from,next){
+    console.log('beforeRouteEnter',to,from);
+    next();
+  }
 };
 </script>
 
