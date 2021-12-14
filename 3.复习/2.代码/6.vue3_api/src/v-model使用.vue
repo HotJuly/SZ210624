@@ -1,20 +1,13 @@
 <template>
   <div>
-    <Suspense>
-      <template #default>
-        <HelloWorld></HelloWorld>
-      </template>
-
-      <template #fallback>
-        <h1>Loading....</h1>
-      </template>
-    </Suspense>
+    <HelloWorld v-model:msg="msg"></HelloWorld>
+    {{msg}}
   </div>
 </template>
 
 <script>
 import HelloWorld from "./components/HelloWorld.vue"
-// import {ref} from 'vue';
+import {ref} from 'vue';
 export default {
   name: 'App',
   components:{
@@ -24,6 +17,7 @@ export default {
 </script>
 
 <script setup>
+  const msg = ref("123");
 </script>
 
 

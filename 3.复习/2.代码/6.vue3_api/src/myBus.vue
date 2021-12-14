@@ -1,19 +1,13 @@
 <template>
   <div>
-    <Suspense>
-      <template #default>
-        <HelloWorld></HelloWorld>
-      </template>
-
-      <template #fallback>
-        <h1>Loading....</h1>
-      </template>
-    </Suspense>
+    <HelloWorld></HelloWorld>
+    {{msg}}
   </div>
 </template>
 
 <script>
 import HelloWorld from "./components/HelloWorld.vue"
+import myBus from './mybus';
 // import {ref} from 'vue';
 export default {
   name: 'App',
@@ -24,6 +18,9 @@ export default {
 </script>
 
 <script setup>
+  myBus.on('change666',(data)=>{
+    console.log('change666',data)
+  })
 </script>
 
 

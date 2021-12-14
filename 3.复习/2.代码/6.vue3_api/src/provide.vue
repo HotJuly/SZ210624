@@ -1,20 +1,12 @@
 <template>
   <div>
-    <Suspense>
-      <template #default>
-        <HelloWorld></HelloWorld>
-      </template>
-
-      <template #fallback>
-        <h1>Loading....</h1>
-      </template>
-    </Suspense>
+    <HelloWorld></HelloWorld>
   </div>
 </template>
 
 <script>
 import HelloWorld from "./components/HelloWorld.vue"
-// import {ref} from 'vue';
+import {provide} from 'vue';
 export default {
   name: 'App',
   components:{
@@ -24,6 +16,8 @@ export default {
 </script>
 
 <script setup>
+  provide("msg123","heihei")
+  provide("msg666","heihei666")
 </script>
 
 
