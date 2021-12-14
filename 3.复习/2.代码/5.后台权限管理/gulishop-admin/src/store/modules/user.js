@@ -3,6 +3,7 @@ import { getToken, setToken, removeToken } from '@/utils/auth'
 import { resetRouter, asyncRoutes, anyRoutes, constantRoutes } from '@/router'
 import router from '@/router'
 import filterAsyncRoutes from '@/utils/filterAsyncRoutes'
+import mapButtons from '@/utils/mapButtons'
 
 const getDefaultState = () => {
   return {
@@ -53,8 +54,10 @@ const mutations = {
     // 由于已经获取到用户的权限信息,所以需要开始动态注入路由
     // state.routes = roles;
 
-
-    state.buttons = buttons;
+    // info.buttons存储这用户的按钮级权限信息
+    // buttons是一个数组,可以用来查找是否具有权限,但是速度较慢,每次都需要遍历
+    // 此处最好转换数据结构,变为对象,方便查找
+    state.buttons = mapButtons(buttons);
   }
 }
 

@@ -58,6 +58,21 @@ Vue.use(ElementUI, { locale })
 
 Vue.config.productionTip = false
 
+Vue.directive("has-permission",{
+  inserted(el,{value}){
+    // el->当前节点生成的真实DOM
+    //value->当前指令的value值
+
+    // 通过value判断用户是否具有该权限,以此决定是否需要显示该节点
+    // console.log('has-permission',el,value)
+
+    if(!store.state.user.buttons[value]){
+      // 如果没有该权限就会进入这个判断
+      el.parentNode.removeChild(el);
+    }
+  }
+})
+
 
 new Vue({
   el: '#app',
