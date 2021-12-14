@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        var obj = {
+            name:"xiaohong",
+            age:18
+        }
+
+        // 当开发者修改obj的name属性时,需要打印数字1
+
+        // Object.defineProperty(obj,'name',{
+        //     configurable:false,
+        //     set(newValue){
+        //         console.log(1)
+        //         // dep.notify()
+        //     },
+        //     get(){
+        //         return "xiaohong"
+        //     }
+        // })
+
+        // obj.name=123
+
+        var proxyObj = new Proxy(obj,{
+            set(target,key,value){
+
+                // target[key] = value;
+                Reflect.set(target,key,value)
+
+                console.log(1)
+                // dep.notify()
+            },
+            get(target,key){
+                return Reflect.get(target,key)
+            },
+            deleteProperty(){
+                Reflect.deleteProperty(target,key)
+                console.log('delete')
+                // dep.notify()
+            },
+            has(){
+                return true
+            },
+            getPrototypeOf(){
+                return {
+                    name:"别找了,找不到"
+                }
+            }
+        })
+
+        proxyObj.name =123;
+        console.log(obj.name)
+
+        // delete proxyObj.age
+        // proxyObj.sex="女"
+
+        // console.log('asdsadsadsad' in proxyObj)
+        // console.log(Object.getPrototypeOf(proxyObj))
+    </script>
+</body>
+</html>

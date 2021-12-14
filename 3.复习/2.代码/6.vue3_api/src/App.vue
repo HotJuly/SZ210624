@@ -1,63 +1,52 @@
 <template>
-  <HelloWorld msg="Welcome to Your Vue.js App"/>
-  <HelloWorld msg="Welcome to Your Vue.js App"/>
-  <HelloWorld msg="Welcome to Your Vue.js App"/>
-  <HelloWorld msg="Welcome to Your Vue.js App"/>
-  <HelloWorld msg="Welcome to Your Vue.js App"/>
-  <!-- <h1>我是obj:{{obj.name}}</h1>
-  <h1>我是obj2:{{obj2.name}}</h1> -->
+  <!-- <h1>名字:{{user.name}}</h1>
+  <h1>年龄:{{user.age}}</h1>
+  <button @click="handleClick">公开年龄</button>
+  <button @click="handleClick1">+1</button> -->
+
+  <ul>
+    <li v-for="item in arr2" :key="item">{{item}} -- 1</li>
+  </ul>
+  <button @click="handleClick">修改数据</button>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
-// import { reactive} from 'vue'
+import { reactive } from "vue"
 export default {
   name: 'App',
-  components: {
-    HelloWorld
-  },
-  // setup(){
+  // setup() {
   //   var obj = {
-  //     name:"xiaoming",
-  //     age:12
+  //     name:"xiaoming"
+  //   };
+  //   var user = reactive(obj);
+  //   var handleClick =()=>{
+  //     user.age = 18;
   //   }
-
-  //   /*
-  //     使用reactive会存在两个对象
-  //       一个是目标对象
-  //       一个是代理对象
-  //       如果想要具有响应式效果,一定要通过代理对象进行操作
-  //       直接操作目标对象,虽然值会发生修改,但是页面不会重新渲染
-
-  //       reactive生成的是代理对象,对该对象的任何操作,都会导致页面渲染,也会同步修改目标对象
-
-  //       ref生成的是ref对象,对象身上具有value属性,是个响应式属性,
-  //         如果属性值是一个对象,会将该对象交给reactive加工
-
-  //       注意:ref相比于reactive,它可以监视对象地址值的变化
-  //   */
-  //   var obj2 = reactive(obj)
-  //   // console.log(obj,obj2)
-  //   // var obj2 = ref(obj)
-  //   // console.log(obj,obj2)
-
-  //   var handleClick = ()=>{
-  //     // obj2.name+="1"
-  //     // console.log(obj,obj2)
-  //     obj2={
-  //       name:"xiaoming1",
-  //       age:12
-  //     }
-
-  //     console.log(obj2)
+  //   var handleClick1 =()=>{
+  //      Vue2->Vue.set(user,"age",4)
+  //     user.age +=1;
   //   }
 
   //   return {
-  //     obj,
-  //     obj2,
-  //     handleClick
+  //     user,
+  //     handleClick,
+  //     handleClick1
   //   }
   // }
+  setup(){
+    var arr = [1,2,3,4,5];
+    var arr2 = reactive(arr);
+
+    var handleClick =()=>{
+      // arr2.splice(2,1,4);
+      arr2[2]=4;
+    }
+
+    return {
+      arr2,
+      handleClick
+    }
+  }
 }
 </script>
 
