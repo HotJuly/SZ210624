@@ -1,8 +1,6 @@
 import { login, logout, getInfo } from '@/api/user'
 import { getToken, setToken, removeToken } from '@/utils/auth'
-import { resetRouter, asyncRoutes, anyRoutes, constantRoutes } from '@/router'
-import router from '@/router'
-import filterAsyncRoutes from '@/utils/filterAsyncRoutes'
+import { resetRouter } from '@/router'
 
 const getDefaultState = () => {
   return {
@@ -11,14 +9,10 @@ const getDefaultState = () => {
     avatar: '',
 
     // 权限管理相关
-    roles: [],
-
-    // 此数组实际上用于存储info.routes
-    routeNames: [],
-    // 此数组实际上用于存储所有能够访问的路由对象
-    routes: [],
-    // 此对象用于存储info.buttons
-    buttons: {}
+    roles:[],
+    routeNames:[],
+    routes:[],
+    buttons:{}
   }
 }
 
@@ -36,25 +30,6 @@ const mutations = {
   },
   SET_AVATAR: (state, avatar) => {
     state.avatar = avatar
-  },
-  SET_PERMISSION: (state, info) => {
-    // console.log('info', info)
-    const {roles, routes, buttons } = info;
-    state.roles = roles;
-    state.routeNames = routes;
-
-    // 这个就是当前账号有权限访问的异步路由组成的数组
-    const selectedAsyncRoutes = filterAsyncRoutes(asyncRoutes,routes)
-
-    router.addRoutes([...selectedAsyncRoutes, ...anyRoutes]);
-
-    state.routes = constantRoutes.concat(selectedAsyncRoutes, anyRoutes);
-
-    // 由于已经获取到用户的权限信息,所以需要开始动态注入路由
-    // state.routes = roles;
-
-
-    state.buttons = buttons;
   }
 }
 
@@ -106,7 +81,6 @@ const actions = {
 
         commit('SET_NAME', name)
         commit('SET_AVATAR', avatar)
-        commit('SET_PERMISSION', data)
         resolve(data)
       }).catch(error => {
         reject(error)

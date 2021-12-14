@@ -31,21 +31,6 @@ import Layout from '@/layout'
  * all roles can be accessed
  */
 
-/*
-  路由分为三种:常量路由,异步路由,任意路由
-    常量路由  
-      他是一开始就要注入router中的路由配置
-      也就是说,该路由是无论任何等级的账号都能随意访问的路由
-
-    异步路由
-      他一开始并不会注入router中的路由配置
-      也就是说,该路由需要根据用户的账号权限实现动态注入
-
-    任意路由
-      内部可以随意放置路由
-
-*/
-
 export const constantRoutes = [
   {
     path: '/login',
@@ -69,10 +54,8 @@ export const constantRoutes = [
       component: () => import('@/views/dashboard/index'),
       meta: { title: '首页', icon: 'dashboard' }
     }]
-  }
-]
-
-export const asyncRoutes = [
+  },
+  
   {
     path: '/product',
     component: Layout,
@@ -105,10 +88,8 @@ export const asyncRoutes = [
       }
     ],
     meta: { title: '商品管理', icon: 'el-icon-s-shop' }
-  }
-]
-
-export const anyRoutes = [
+  },
+  
   // 404 page must be placed at the end !!!
   { path: '*', redirect: '/404', hidden: true }
 ]
